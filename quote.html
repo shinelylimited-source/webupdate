@@ -465,9 +465,10 @@
       <div class="container">
         <div class="header-inner">
           <a href="index.html" class="logo">
-             <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
+                     <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
             🧹 
             <!-- <span>Shinely</span> -->
+          
           </a>
           <button class="menu-toggle" aria-label="Toggle menu">
             <span></span>
@@ -493,14 +494,14 @@
         <div class="container">
           <h1>Get Your Free Quote</h1>
           <p class="subtitle">Please enter your details below, and a dedicated member of our team will be in touch shortly with a personalized quote.</p>
-          <a href="#quote-form" class="btn btn-red">Back to Home</a>
+          <a href="index.html" class="btn btn-red">Back to Home</a>
         </div>
       </section>
 
       <!-- Quote Form Section -->
       <section id="quote-form">
         <div class="container">
-          <div id="formSuccess" class="form-success">
+          <div class="form-success" id="formSuccess">
             <strong>✅ Quote Request Submitted Successfully!</strong>
             <p>Thank you for your request. A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours with a personalized quote.</p>
           </div>
@@ -568,7 +569,7 @@
                 <textarea id="details" placeholder="Any specific requests or access instructions..."></textarea>
               </div>
 
-              <button type="submit" class="btn btn-red">Submit Request</button>
+              <button type="submit" id="submitBtn" class="btn btn-red">Submit Request</button>
             </form>
           </div>
 
@@ -631,14 +632,14 @@
           <div class="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:+1234567890">📞 (555) 123-4567</a></li>
+              <li><a href="tel:+1234567890">📞 074 326 42168</a></li>
               <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
-              <li>Your City, Country</li>
+              <li>Cardiff, United Kingdom</li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 SHINELY LIMITED. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+          <p>&copy; 2024 SHINELY LIMITED. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         </div>
       </div>
     </footer>
@@ -662,6 +663,7 @@
     const mainNav = document.querySelector('.main-nav ul');
     const quoteForm = document.getElementById('quoteForm');
     const formSuccess = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('submitBtn');
 
     // Mobile Menu Toggle with Hamburger Animation
     if (menuToggle && mainNav) {
@@ -767,14 +769,13 @@
 
         // If valid, submit to Google Apps Script
         if (isValid) {
-          const submitBtn = quoteForm.querySelector('button[type="submit"]');
           const originalText = submitBtn.textContent;
           submitBtn.textContent = 'Submitting...';
           submitBtn.disabled = true;
 
           try {
             // IMPORTANT: Replace with your Google Apps Script deployment URL
-            const APPS_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/usercontent';
+            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwo-EW7I9nn7fEEDwdsttKfDUTdg6WDb-HU4JfkkN0CykZmRmwkS73vU-0cdXfYojm7Zg/exec';
             
             const formData = {
               name: name,
@@ -786,29 +787,25 @@
               details: details
             };
 
-            const response = await fetch(APPS_SCRIPT_URL, {
+            // Use no-cors for Google Apps Script
+            await fetch(APPS_SCRIPT_URL, {
               method: 'POST',
-              body: JSON.stringify(formData),
+              mode: 'no-cors',
+              cache: 'no-cache',
               headers: {
                 'Content-Type': 'application/json'
-              }
+              },
+              body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
-
-            if (result.status === 'success') {
-              formSuccess.classList.add('show');
-              quoteForm.reset();
-              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-              alert('Error: ' + result.message);
-            }
-          } catch (error) {
-            console.error('Form submission error:', error);
-            // Show success anyway - the form may have been submitted even if we can't confirm
+            // Show success message and reset form
             formSuccess.classList.add('show');
             quoteForm.reset();
             formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+          } catch (error) {
+            console.error('Form submission error:', error);
+            alert('There was an error submitting your request. Please try again later.');
           } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
@@ -819,3 +816,4 @@
   </script>
 </body>
 </html>
+
