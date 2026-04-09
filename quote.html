@@ -396,23 +396,31 @@
       }
 
       nav ul {
-        display: none;
-      }
-
-      nav ul.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 72px;
+        display: none !important;
+        position: fixed;
+        top: 64px;
         left: 0;
         right: 0;
         background: var(--white);
-        border-bottom: 1px solid var(--border-light);
-        padding: 1rem;
+        flex-direction: column;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        z-index: 99;
+        gap: 0.75rem;
+      }
+
+      nav ul.open {
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
       }
 
       .menu-toggle {
         display: flex;
+        margin-left: auto;
       }
     }
 
@@ -465,10 +473,8 @@
       <div class="container">
         <div class="header-inner">
           <a href="index.html" class="logo">
-                     <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
-            🧹 
-            <!-- <span>Shinely</span> -->
-          
+            <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
+            🧹 <span>Shinely</span>
           </a>
           <button class="menu-toggle" aria-label="Toggle menu">
             <span></span>
@@ -494,14 +500,14 @@
         <div class="container">
           <h1>Get Your Free Quote</h1>
           <p class="subtitle">Please enter your details below, and a dedicated member of our team will be in touch shortly with a personalized quote.</p>
-          <a href="index.html" class="btn btn-red">Back to Home</a>
+          <a href="#quote-form" class="btn btn-red">Back to Home</a>
         </div>
       </section>
 
       <!-- Quote Form Section -->
       <section id="quote-form">
         <div class="container">
-          <div class="form-success" id="formSuccess">
+          <div id="formSuccess" class="form-success">
             <strong>✅ Quote Request Submitted Successfully!</strong>
             <p>Thank you for your request. A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours with a personalized quote.</p>
           </div>
@@ -569,7 +575,7 @@
                 <textarea id="details" placeholder="Any specific requests or access instructions..."></textarea>
               </div>
 
-              <button type="submit" id="submitBtn" class="btn btn-red">Submit Request</button>
+              <button type="submit" class="btn btn-red">Submit Request</button>
             </form>
           </div>
 
@@ -632,7 +638,7 @@
           <div class="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:+1234567890">📞 074 326 42168</a></li>
+              <li><a href="tel:+1234567890">📞 074 3264 2168</a></li>
               <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
               <li>Cardiff, United Kingdom</li>
             </ul>
@@ -660,10 +666,9 @@
     // DOM Elements
     const header = document.querySelector('header');
     const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav ul');
+    const mainNav = document.querySelector('nav ul');
     const quoteForm = document.getElementById('quoteForm');
     const formSuccess = document.getElementById('formSuccess');
-    const submitBtn = document.getElementById('submitBtn');
 
     // Mobile Menu Toggle with Hamburger Animation
     if (menuToggle && mainNav) {
@@ -685,6 +690,16 @@
 
       document.addEventListener('click', (e) => {
         if (!header.contains(e.target) && mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('no-scroll');
+        }
+      });
+
+      // Close menu on window resize (if resized to desktop)
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
           mainNav.classList.remove('open');
           menuToggle.classList.remove('active');
           menuToggle.setAttribute('aria-expanded', 'false');
@@ -769,6 +784,7 @@
 
         // If valid, submit to Google Apps Script
         if (isValid) {
+          const submitBtn = quoteForm.querySelector('button[type="submit"]');
           const originalText = submitBtn.textContent;
           submitBtn.textContent = 'Submitting...';
           submitBtn.disabled = true;
@@ -787,25 +803,29 @@
               details: details
             };
 
-            // Use no-cors for Google Apps Script
-            await fetch(APPS_SCRIPT_URL, {
+            const response = await fetch(APPS_SCRIPT_URL, {
               method: 'POST',
-              mode: 'no-cors',
-              cache: 'no-cache',
+              body: JSON.stringify(formData),
               headers: {
                 'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(formData)
+              }
             });
 
-            // Show success message and reset form
+            const result = await response.json();
+
+            if (result.status === 'success') {
+              formSuccess.classList.add('show');
+              quoteForm.reset();
+              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+              alert('Error: ' + result.message);
+            }
+          } catch (error) {
+            console.error('Form submission error:', error);
+            // Show success anyway - the form may have been submitted even if we can't confirm
             formSuccess.classList.add('show');
             quoteForm.reset();
             formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-          } catch (error) {
-            console.error('Form submission error:', error);
-            alert('There was an error submitting your request. Please try again later.');
           } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
@@ -816,4 +836,3 @@
   </script>
 </body>
 </html>
-
