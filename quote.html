@@ -15,7 +15,7 @@
   <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
   <!-- Font Awesome Icons (moved to head for better performance) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <style>
     :root {
@@ -396,31 +396,23 @@
       }
 
       nav ul {
-        display: none !important;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        flex-direction: column;
-        padding: 1.5rem;
-        box-shadow: var(--shadow-md);
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-        z-index: 99;
-        gap: 0.75rem;
+        display: none;
       }
 
       nav ul.open {
-        display: flex !important;
-        opacity: 1;
-        visibility: visible;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border-light);
+        padding: 1rem;
       }
 
       .menu-toggle {
         display: flex;
-        margin-left: auto;
       }
     }
 
@@ -473,7 +465,6 @@
       <div class="container">
         <div class="header-inner">
           <a href="index.html" class="logo">
-            <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
             🧹 <span>Shinely</span>
           </a>
           <button class="menu-toggle" aria-label="Toggle menu">
@@ -500,7 +491,7 @@
         <div class="container">
           <h1>Get Your Free Quote</h1>
           <p class="subtitle">Please enter your details below, and a dedicated member of our team will be in touch shortly with a personalized quote.</p>
-          <a href="#quote-form" class="btn btn-red">Back to Home</a>
+          <a href="#quote-form" class="btn btn-red">Start Now</a>
         </div>
       </section>
 
@@ -638,28 +629,20 @@
           <div class="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:+1234567890">📞 074 3264 2168</a></li>
+              <li><a href="tel:+1234567890">📞 (555) 123-4567</a></li>
               <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
-              <li>Cardiff, United Kingdom</li>
+              <li>Your City, Country</li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 SHINELY LIMITED. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+          <p>&copy; 2026 SHINELY LIMITED. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         </div>
       </div>
     </footer>
   </div>
 
   <script>
-    // ========================================================================
-    // CONFIGURATION - UPDATE YOUR GOOGLE APPS SCRIPT DEPLOYMENT URL HERE
-    // ========================================================================
-    // Replace 'YOUR_DEPLOYMENT_ID_HERE' with your actual AppScript deployment ID
-    // Example: 'https://script.google.com/macros/s/AKfycbz4S-SJHIsCkVMGvpxJklw_y3Hpus5YqIDHHjGr_SuofakgbmvRps06JeepczZPwtwQ4A/exec'
-    const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrRATfiHhfH_pwHawI0TjBxcMEZtOLQxCPPCEz_6reLELXokkTcSn1UhicOG-6bV3c/exec';
-    // ========================================================================
-
     // Form validation functions
     function isValidEmail(email) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -674,7 +657,7 @@
     // DOM Elements
     const header = document.querySelector('header');
     const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('nav ul');
+    const mainNav = document.querySelector('.main-nav ul');
     const quoteForm = document.getElementById('quoteForm');
     const formSuccess = document.getElementById('formSuccess');
 
@@ -698,16 +681,6 @@
 
       document.addEventListener('click', (e) => {
         if (!header.contains(e.target) && mainNav.classList.contains('open')) {
-          mainNav.classList.remove('open');
-          menuToggle.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          document.body.classList.remove('no-scroll');
-        }
-      });
-
-      // Close menu on window resize (if resized to desktop)
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
           mainNav.classList.remove('open');
           menuToggle.classList.remove('active');
           menuToggle.setAttribute('aria-expanded', 'false');
@@ -742,9 +715,7 @@
       });
     });
 
-    // ========================================================================
-    // FORM VALIDATION AND SUBMISSION WITH GOOGLE APPS SCRIPT INTEGRATION
-    // ========================================================================
+    // Form Validation and Submission with Google Apps Script Integration
     if (quoteForm) {
       quoteForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -800,16 +771,10 @@
           submitBtn.disabled = true;
 
           try {
-            // Check if AppScript URL has been configured
-            if (APPSCRIPT_URL.includes('1qyoUrhpheSSK5MeTJXUNtTWpsksB3fSjFsffH32wNAk')) {
-              console.error('ERROR: AppScript URL not configured. Please update APPSCRIPT_URL with your deployment ID.');
-              alert('Error: AppScript URL not configured. Please contact the administrator.');
-              submitBtn.textContent = originalText;
-              submitBtn.disabled = false;
-              return;
-            }
-
-            // Prepare form data for submission
+            // IMPORTANT: Replace YOUR_DEPLOYMENT_ID with your actual Google Apps Script deployment ID
+            // The URL format should be: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+            
             const formData = {
               name: name,
               email: email,
@@ -820,10 +785,7 @@
               details: details
             };
 
-            console.log('Sending form data to AppScript:', formData);
-
-            // Send data to Google Apps Script
-            const response = await fetch(APPSCRIPT_URL, {
+            const response = await fetch(APPS_SCRIPT_URL, {
               method: 'POST',
               body: JSON.stringify(formData),
               headers: {
@@ -833,33 +795,19 @@
 
             const result = await response.json();
 
-            console.log('AppScript response:', result);
-
             if (result.status === 'success') {
-              // Show success message
               formSuccess.classList.add('show');
-              
-              // Reset form
               quoteForm.reset();
-              
-              // Scroll to success message
               formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              
-              console.log('✓ Form submitted successfully');
             } else {
-              console.error('AppScript error:', result.message);
               alert('Error: ' + result.message);
             }
           } catch (error) {
             console.error('Form submission error:', error);
-            
             // Show success anyway - the form may have been submitted even if we can't confirm
-            // This handles cases where the response can't be parsed
             formSuccess.classList.add('show');
             quoteForm.reset();
             formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            console.log('Form submitted (confirmation pending)');
           } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
