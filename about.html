@@ -498,6 +498,7 @@
       justify-content: center;
       padding: 1rem 2.5rem;
       background: var(--primary-blue);
+      color: var(--white);
       border-radius: 10px;
       font-weight: 700;
       transition: var(--transition);
@@ -608,6 +609,7 @@
 
       .menu-toggle {
         display: flex;
+        margin-left: auto;
       }
 
       nav ul {
@@ -619,7 +621,7 @@
         flex-direction: column;
         padding: 1.5rem;
         box-shadow: var(--shadow-md);
-        transform: translateY(-100%);
+        display: none !important;
         opacity: 0;
         visibility: hidden;
         transition: var(--transition);
@@ -628,7 +630,7 @@
       }
 
       nav ul.open {
-        transform: translateY(0);
+        display: flex !important;
         opacity: 1;
         visibility: visible;
       }
@@ -678,14 +680,12 @@
   <div class="auto-frame">
     <!-- Header with Corrected Navigation Structure -->
     <header id="main-header">
-      <div class="container">
-        <div class="header-inner">
-          <a href="index.html" class="logo">
-            <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
-             
-          </a>
-          <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">SHINELY<span>.</span>
+        <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span>
           <span></span>
           <span></span>
         </button>
@@ -695,7 +695,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#services">Services</a></li>
             <li><a href="about.html" class="active">About</a></li>
-            <li><a href="quote.html" class="btn btn-red">Get a Quote</a></li>
+            <li><a href="#contact" class="btn btn-red">Get a Quote</a></li>
           </ul>
         </nav>
       </div>
@@ -830,7 +830,7 @@
         <div class="container">
           <h2>Ready to Experience the SHINELY Difference?</h2>
           <p class="subtitle">Join hundreds of satisfied clients who trust us to keep their spaces spotless. Get your free, no-obligation quote today!</p>
-          <a href="quote.html" class="btn btn-red">Get Your Free Quote Now</a>
+          <a href="#contact" class="btn btn-red">Get Your Free Quote Now</a>
         </div>
       </section>
     </main>
@@ -849,7 +849,7 @@
               <li><a href="index.html">Home</a></li>
               <li><a href="index.html#services">Services</a></li>
               <li><a href="about.html">About</a></li>
-              <li><a href="quote.html">Get a Quote</a></li>
+              <li><a href="#contact">Get a Quote</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -865,7 +865,7 @@
           <div class="footer-col">
             <h4>Contact</h4>
             <p><i class="fas fa-envelope"></i> info@shinelylimited.com</p>
-            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            <p><i class="fas fa-phone"></i> 074 326 42168/p>
             <p><i class="fas fa-map-marker-alt"></i> Your City, Country</p>
           </div>
         </div>
@@ -877,8 +877,8 @@
   <!-- Enhanced JavaScript with Improvements -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menuToggle');
-      const mainNav = document.getElementById('main-nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mainNav = document.querySelector('nav ul');
       const header = document.getElementById('main-header');
 
       // Mobile Menu Toggle with Hamburger Animation
@@ -903,6 +903,16 @@
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
           if (!header.contains(e.target) && mainNav.classList.contains('open')) {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+          }
+        });
+
+        // Close menu on window resize (if resized to desktop)
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
             mainNav.classList.remove('open');
             menuToggle.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
