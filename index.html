@@ -520,7 +520,6 @@
       height: 100%;
       object-fit: cover;
       transition: var(--transition);
-      loading: lazy;
     }
 
     .gallery-item:hover img {
@@ -772,6 +771,7 @@
 
       .menu-toggle {
         display: flex;
+        margin-left: auto;
       }
 
       nav ul {
@@ -783,7 +783,7 @@
         flex-direction: column;
         padding: 1.5rem;
         box-shadow: var(--shadow-md);
-        transform: translateY(-100%);
+        display: none !important;
         opacity: 0;
         visibility: hidden;
         transition: var(--transition);
@@ -792,7 +792,7 @@
       }
 
       nav ul.open {
-        transform: translateY(0);
+        display: flex !important;
         opacity: 1;
         visibility: visible;
       }
@@ -848,7 +848,7 @@
           <span>🧹</span>
          <!---- <span>Shinely</span> -->
         </a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
           <span></span>
           <span></span>
           <span></span>
@@ -906,17 +906,17 @@
             <div class="service-card">
               <div class="service-icon"><i class="fas fa-calendar-check"></i> 📅</div>
               <h3>Airbnb Cleaning</h3>
-              <p>Professional turnover cleaning for short-term rentals, ensuring your guests always arrive to a 5-star clean home.</p>
+              <p>Fast turnaround cleaning for short-term rentals, ensuring your property is always guest-ready and impressive.</p>
             </div>
             <div class="service-card">
-              <div class="service-icon"><i class="fas fa-building"></i> 🏢</div>
+              <div class="service-icon"><i class="fas fa-briefcase"></i> 💼</div>
               <h3>Office Cleaning</h3>
-              <p>Reliable commercial cleaning services to maintain a professional, healthy, and productive workspace for your team.</p>
+              <p>Professional commercial cleaning to maintain a pristine, productive workspace for your team and clients.</p>
             </div>
             <div class="service-card">
-              <div class="service-icon"><i class="fas fa-warehouse"></i> 🏭</div>
+              <div class="service-icon"><i class="fas fa-industry"></i> 🏭</div>
               <h3>Warehouse Cleaning</h3>
-              <p>Specialized industrial cleaning solutions for large-scale facilities, focusing on safety and thoroughness.</p>
+              <p>Industrial cleaning services including high-reach dusting, floor scrubbing, and equipment maintenance.</p>
             </div>
           </div>
         </div>
@@ -927,31 +927,39 @@
         <div class="container">
           <div class="about-wrapper">
             <div class="about-image">
-              <img src="images/cleaning-cart.jpg" alt="Professional Cleaning Team">
+              <img src="images/cleaning-cart.jpg" alt="Professional Cleaning Team" loading="lazy">
             </div>
             <div class="about-content">
               <h2>Dedicated to Excellence & Your Satisfaction</h2>
               <p>SHINELY LIMITED is a professional cleaning company dedicated to delivering high-quality, reliable, and affordable cleaning solutions for homes and businesses.</p>
-              <p>We specialize in domestic cleaning, deep cleaning, end of tenancy, and Airbnb cleaning, ensuring every space is left spotless, fresh, and welcoming. Our goal is simple: to provide consistent, trustworthy service that gives our clients complete peace of mind.</p>
-              <div class="grid features-grid">
+              <p>We specialize in domestic cleaning, deep cleaning, end of tenancy, and Airbnb cleaning, ensuring every space is left spotless, fresh, and welcoming. Our goal is simple: to provide consistent, professional service that exceeds expectations.</p>
+              <div class="features-grid">
                 <div class="feature-item">
-                  <div class="icon">🛡️</div>
-                  <p>Fully Insured</p>
+                  <span class="icon">⭐</span>
+                  <p>Premium Quality Service</p>
                 </div>
                 <div class="feature-item">
-                  <div class="icon">🌿</div>
-                  <p>Eco-Friendly</p>
+                  <span class="icon">🛡️</span>
+                  <p>Fully Insured & Bonded</p>
                 </div>
                 <div class="feature-item">
-                  <div class="icon">✅</div>
-                  <p>100% Guarantee</p>
+                  <span class="icon">🌿</span>
+                  <p>Eco-Friendly Products</p>
                 </div>
                 <div class="feature-item">
-                  <div class="icon">👥</div>
-                  <p>Vetted Team</p>
+                  <span class="icon">✅</span>
+                  <p>100% Satisfaction</p>
+                </div>
+                <div class="feature-item">
+                  <span class="icon">👥</span>
+                  <p>Trained Professionals</p>
+                </div>
+                <div class="feature-item">
+                  <span class="icon">⚡</span>
+                  <p>Fast & Reliable</p>
                 </div>
               </div>
-              <a href="about.html" class="btn">Learn More About Us</a>
+              <a href="about.html" class="btn btn-red">Learn More</a>
             </div>
           </div>
         </div>
@@ -961,31 +969,25 @@
       <section id="gallery" class="gallery-section">
         <div class="container">
           <div class="section-title">
-            <h2>Our Work in Action</h2>
-            <p>See the transformative results we deliver for our clients</p>
+            <h2>Our Recent Work</h2>
+            <p>See the transformation we bring to every space</p>
           </div>
           <div class="grid gallery-grid">
             <div class="gallery-item">
-              <img src="images/kitchen.jpg" alt="Clean Kitchen">
-              <div class="gallery-caption">
-                <h3>Sparkling Kitchens</h3>
-              </div>
+              <img src="images/bathroom.jpg" alt="Bathroom Deep Clean" loading="lazy">
+              <div class="gallery-caption"><h3>Bathroom Deep Clean</h3></div>
             </div>
-              <div class="gallery-item">
+            <div class="gallery-item">
+              <img src="images/lounge.jpg" alt="Living Room Refresh" loading="lazy">
+              <div class="gallery-caption"><h3>Living Room Refresh</h3></div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/kitchen.jpg" alt="Kitchen Sanitization" loading="lazy">
+              <div class="gallery-caption"><h3>Kitchen Sanitization</h3></div>
+            </div>
+            <div class="gallery-item">
               <img src="images/office.jpg" alt="Office Transformation" loading="lazy">
               <div class="gallery-caption"><h3>Office Transformation</h3></div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/bathroom.jpg" alt="Clean Bathroom">
-              <div class="gallery-caption">
-                <h3>Sanitized Bathrooms</h3>
-              </div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/lounge.jpg" alt="Clean Living Room">
-              <div class="gallery-caption">
-                <h3>Fresh Living Spaces</h3>
-              </div>
             </div>
           </div>
         </div>
@@ -1006,22 +1008,22 @@
                 <li class="contact-item">
                   <i class="fas fa-envelope"></i>
                   <div class="contact-item-text">
-                    <strong>Email Us</strong>
+                    <strong>Email</strong>
                     <p>info@shinelylimited.com</p>
                   </div>
                 </li>
                 <li class="contact-item">
                   <i class="fas fa-phone"></i>
                   <div class="contact-item-text">
-                    <strong>Call Us</strong>
-                    <p>074 326 42168</p>
+                    <strong>Phone</strong>
+                    <p>(555) 123-4567</p>
                   </div>
                 </li>
                 <li class="contact-item">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <i class="fas fa-clock"></i>
                   <div class="contact-item-text">
-                    <strong>Visit Us</strong>
-                    <p>Cardiff, United Kingdom</p>
+                    <strong>Hours</strong>
+                    <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
                   </div>
                 </li>
               </ul>
@@ -1052,7 +1054,7 @@
                   <textarea id="message" name="message" required placeholder="Your message"></textarea>
                   <div class="form-error" id="messageError">Please enter your message</div>
                 </div>
-                <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Send Message</button>
+                <button type="submit" class="btn" style="width: 100%;">Send Message</button>
               </form>
             </div>
           </div>
@@ -1091,8 +1093,8 @@
           <div class="footer-col">
             <h4>Contact</h4>
             <p><i class="fas fa-envelope"></i> info@shinelylimited.com</p>
-            <p><i class="fas fa-phone"></i> 074 326 42168</p>
-            <p><i class="fas fa-map-marker-alt"></i> Cardiff, United Kingdom</p>
+            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+            <p><i class="fas fa-map-marker-alt"></i> Your City, Country</p>
           </div>
         </div>
         <p class="copyright">© 2024 SHINELY LIMITED. All Rights Reserved.</p>
@@ -1103,12 +1105,11 @@
   <!-- Enhanced JavaScript with Improvements -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menuToggle');
-      const mainNav = document.getElementById('main-nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mainNav = document.querySelector('nav ul');
       const header = document.getElementById('main-header');
       const contactForm = document.getElementById('contactForm');
       const formSuccess = document.getElementById('formSuccess');
-      const submitBtn = document.getElementById('submitBtn');
 
       // Mobile Menu Toggle with Hamburger Animation
       if (menuToggle && mainNav) {
@@ -1132,6 +1133,16 @@
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
           if (!header.contains(e.target) && mainNav.classList.contains('open')) {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+          }
+        });
+
+        // Close menu on window resize (if resized to desktop)
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
             mainNav.classList.remove('open');
             menuToggle.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
@@ -1206,45 +1217,12 @@
             isValid = false;
           }
 
-          // If valid, send via Google Apps Script
+          // If valid, show success message and reset form
           if (isValid) {
-            // Update button state
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            // GOOGLE APPS SCRIPT WEB APP URL
-            // REPLACE THIS URL WITH YOUR DEPLOYED WEB APP URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwA73LwbSNFSq9P9S-KfQTfz8jwLVpOos5iXHXIakMHx6NWsrTxwAfWB0Bezxq8gKjp/exec';
-
-            fetch(scriptURL, {
-              method: 'POST',
-              mode: 'no-cors', // Important for Google Apps Script
-              cache: 'no-cache',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                name: name,
-                email: email,
-                phone: phone,
-                message: message
-              })
-            })
-            .then(() => {
-              // Show success message and reset form
-              formSuccess.classList.add('show');
-              contactForm.reset();
-              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            })
-            .catch(error => {
-              console.error('Error!', error.message);
-              alert('There was an error sending your message. Please try again later.');
-            })
-            .finally(() => {
-              submitBtn.textContent = originalBtnText;
-              submitBtn.disabled = false;
-            });
+            formSuccess.classList.add('show');
+            contactForm.reset();
+            // Scroll to success message
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
         });
       }
