@@ -735,7 +735,210 @@
     });
 
     // Form Validation and Submission with Google Apps Script Integration
-    if (quoteForm) {
+/**
+ * QUOTE.HTML FORM SUBMISSION CODE
+ * 
+ * INSTRUCTIONS:
+ * 1. Find the existing form submission code in quote.html (around line 738-806)
+ * 2. Replace the entire "Form Validation and Submission" section with this code
+ * 3. Update the APPSCRIPT_URL below with your deployed Apps Script URL
+ * 4. Save the file
+ */
+
+// ============================================================================
+// !!! IMPORTANT: UPDATE THIS WITH YOUR APPSCRIPT DEPLOYMENT URL !!!
+// ============================================================================
+// After deploying your Apps Script, copy the deployment URL here
+// Example: https://script.google.com/macros/s/AKfycbx.../exec
+const APPSCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_HERE/exec';
+// ============================================================================
+
+// Form Validation and Submission with Google Apps Script Integration
+if (quoteForm) {
+  quoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // ========================================================================
+    // STEP 1: Get all form values from the HTML elements
+    // ========================================================================
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const service = document.getElementById('service').value;
+    const size = document.getElementById('size').value;
+    const details = document.getElementById('details').value.trim();
+
+    // ========================================================================
+    // STEP 2: Reset all error messages
+    // ========================================================================
+    document.querySelectorAll('.form-error').forEach(error => {
+      error.classList.remove('show');
+    });
+    formSuccess.classList.remove('show');
+
+    // ========================================================================
+    // STEP 3: Validate all required fields
+    // ========================================================================
+    let isValid = true;
+
+    // Validate Name
+    if (!name) {
+      document.getElementById('nameError').classList.add('show');
+      isValid = false;
+    }
+
+    // Validate Email
+    if (!email || !isValidEmail(email)) {
+      document.getElementById('emailError').classList.add('show');
+      isValid = false;
+    }
+
+    // Validate Phone
+    if (!phone || !isValidPhone(phone)) {
+      document.getElementById('phoneError').classList.add('show');
+      isValid = false;
+    }
+
+    // Validate Address
+    if (!address) {
+      document.getElementById('addressError').classList.add('show');
+      isValid = false;
+    }
+
+    // Validate Service (required)
+    if (!service) {
+      document.getElementById('serviceError').classList.add('show');
+      isValid = false;
+    }
+
+    // If validation fails, stop here and don't send to server
+    if (!isValid) {
+      console.log('Form validation failed. Please fix errors.');
+      return;
+    }
+
+    // ========================================================================
+    // STEP 4: Prepare data to send to AppScript
+    // ========================================================================
+    const formData = {
+      name: name,
+      email: email,
+      phone: phone,
+      address: address,
+      service: service,
+      size: size || 'Not specified',
+      details: details
+    };
+
+    console.log('✓ Form validation passed. Sending data:', formData);
+
+    // ========================================================================
+    // STEP 5: Disable submit button and show loading state
+    // ========================================================================
+    const submitBtn = quoteForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      // ====================================================================
+      // STEP 6: Send POST request to AppScript
+      // ====================================================================
+      console.log('Sending POST request to AppScript...');
+      
+      const response = await fetch(APPSCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
+        mode: 'no-cors' // Important for AppScript CORS handling
+      });
+
+      console.log('✓ POST request sent successfully');
+
+      // ====================================================================
+      // STEP 7: Show success message
+      // ====================================================================
+      formSuccess.classList.add('show');
+      
+      // ====================================================================
+      // STEP 8: Reset the form fields
+      // ====================================================================
+      quoteForm.reset();
+
+      // ====================================================================
+      // STEP 9: Scroll to success message so user sees it
+      // ====================================================================
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      console.log('✓ Quote submission successful!');
+
+      // ====================================================================
+      // STEP 10: Re-enable button after 3 seconds
+      // ====================================================================
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }, 3000);
+
+    } catch (error) {
+      console.error('✗ Error sending quote form:', error);
+      
+      // ====================================================================
+      // STEP 11: Show error message if something goes wrong
+      // ====================================================================
+      const errorDiv = document.createElement('div');
+      errorDiv.style.cssText = `
+        background: #fee2e2;
+        border: 2px solid #dc2626;
+        color: #991b1b;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        font-weight: bold;
+      `;
+      errorDiv.innerHTML = `
+        <strong>✗ Error Submitting Quote</strong>
+        <p>There was an error submitting your quote request. Please try again or contact us directly at 074 3264 2168.</p>
+      `;
+      
+      quoteForm.parentNode.insertBefore(errorDiv, quoteForm);
+
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+
+      // Remove error message after 5 seconds
+      setTimeout(() => {
+        errorDiv.remove();
+      }, 5000);
+    }
+  });
+}
+
+// ============================================================================
+// VALIDATION HELPER FUNCTIONS (Already in your quote.html, but included here for reference)
+// ============================================================================
+
+/**
+ * Validates email format using regex
+ */
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Validates phone number format (at least 10 digits)
+ */
+function isValidPhone(phone) {
+  const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+  return phoneRegex.test(phone.replace(/\s/g, ''));
+}
+    
+ /*   if (quoteForm) {
       quoteForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -789,7 +992,7 @@
           submitBtn.textContent = 'Submitting...';
           submitBtn.disabled = true;
 
-          try {
+       try {
             // IMPORTANT: Replace with your Google Apps Script deployment URL
             const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4S-SJHIsCkVMGvpxJklw_y3Hpus5YqIDHHjGr_SuofakgbmvRps06JeepczZPwtwQ4A/exec';
             
@@ -832,7 +1035,7 @@
           }
         }
       });
-    }
+    }*/
   </script>
 </body>
 </html>
