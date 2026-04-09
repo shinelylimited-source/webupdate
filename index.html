@@ -847,7 +847,7 @@
         <a href="index.html" class="logo">
           <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
           <span>🧹</span>
-         <!---- <span>Shinely</span> -->
+          
         </a>
         <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
           <span></span>
@@ -1094,8 +1094,8 @@
           <div class="footer-col">
             <h4>Contact</h4>
             <p><i class="fas fa-envelope"></i> info@shinelylimited.com</p>
-            <p><i class="fas fa-phone"></i>074 3264 2168</p>
-            <p><i class="fas fa-map-marker-alt"></i> Cardiff , United Kingdom</p>
+            <p><i class="fas fa-phone"></i> 074 3264 2168</p>
+            <p><i class="fas fa-map-marker-alt"></i> Cardiff, United Kingdom</p>
           </div>
         </div>
         <p class="copyright">© 2024 SHINELY LIMITED. All Rights Reserved.</p>
@@ -1234,28 +1234,46 @@
 
             const CONTACT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA73LwbSNFSq9P9S-KfQTfz8jwLVpOos5iXHXIakMHx6NWsrTxwAfWB0Bezxq8gKjp/exec';
 
+            if (CONTACT_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+              alert('Error: The Google Apps Script URL has not been configured. Please replace the placeholder in index.html with your actual Web App URL.');
+              submitButton.textContent = originalButtonText;
+              submitButton.disabled = false;
+              return;
+            }
+
+            console.log('Sending contact form data to:', CONTACT_APPS_SCRIPT_URL);
+            console.log('Form data:', formData);
+
             fetch(CONTACT_APPS_SCRIPT_URL, {
               method: 'POST',
               body: JSON.stringify(formData)
             })
-            .then(response => response.json())
+            .then(response => {
+              console.log('Response status:', response.status);
+              if (!response.ok) {
+                throw new Error('HTTP error, status = ' + response.status);
+              }
+              return response.json();
+            })
             .then(data => {
+              console.log('Response data:', data);
               if (data.status === 'success') {
                 formSuccess.classList.add('show');
                 contactForm.reset();
                 formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               } else {
-                alert('Error: ' + data.message);
+                alert('Error: ' + (data.message || 'Unknown error occurred'));
               }
             })
             .catch(error => {
-              console.error('Error:', error);
-              alert('An error occurred while sending your message. Please try again.');
+              console.error('Detailed error:', error);
+              console.error('Error message:', error.message);
+              alert('An error occurred while sending your message. Please check the browser console for more details. Error: ' + error.message);
             })
             .finally(() => {
               submitButton.textContent = originalButtonText;
               submitButton.disabled = false;
-            });
+             });
           }
         });
       }
