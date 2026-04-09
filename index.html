@@ -1217,12 +1217,45 @@
             isValid = false;
           }
 
-          // If valid, show success message and reset form
+          // If valid, send via Google Apps Script
           if (isValid) {
-            formSuccess.classList.add('show');
-            contactForm.reset();
-            // Scroll to success message
-            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Update button state
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // GOOGLE APPS SCRIPT WEB APP URL
+            // REPLACE THIS URL WITH YOUR DEPLOYED WEB APP URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwA73LwbSNFSq9P9S-KfQTfz8jwLVpOos5iXHXIakMHx6NWsrTxwAfWB0Bezxq8gKjp/exec';
+
+            fetch(scriptURL, {
+              method: 'POST',
+              mode: 'no-cors', // Important for Google Apps Script
+              cache: 'no-cache',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                message: message
+              })
+            })
+            .then(() => {
+              // Show success message and reset form
+              formSuccess.classList.add('show');
+              contactForm.reset();
+              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            })
+            .catch(error => {
+              console.error('Error!', error.message);
+              alert('There was an error sending your message. Please try again later.');
+            })
+            .finally(() => {
+              submitBtn.textContent = originalBtnText;
+              submitBtn.disabled = false;
+            });
           }
         });
       }
