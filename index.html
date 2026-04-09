@@ -1217,6 +1217,56 @@
             isValid = false;
           }
 
+          // If valid, show success message and reset form
+          if (isValid) {
+            formSuccess.classList.add('show');
+            contactForm.reset();
+            // Scroll to success message
+            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      }
+
+        // Form Validation and Submission
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          // Get form values
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const phone = document.getElementById('phone').value.trim();
+          const message = document.getElementById('message').value.trim();
+
+          // Reset error messages
+          document.querySelectorAll('.form-error').forEach(error => {
+            error.classList.remove('show');
+          });
+          formSuccess.classList.remove('show');
+
+          // Validation
+          let isValid = true;
+
+          if (!name) {
+            document.getElementById('nameError').classList.add('show');
+            isValid = false;
+          }
+
+          if (!email || !isValidEmail(email)) {
+            document.getElementById('emailError').classList.add('show');
+            isValid = false;
+          }
+
+          if (phone && !isValidPhone(phone)) {
+            document.getElementById('phoneError').classList.add('show');
+            isValid = false;
+          }
+
+          if (!message) {
+            document.getElementById('messageError').classList.add('show');
+            isValid = false;
+          }
+
           // If valid, send via Google Apps Script
           if (isValid) {
             // Update button state
