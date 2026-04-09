@@ -520,6 +520,7 @@
       height: 100%;
       object-fit: cover;
       transition: var(--transition);
+      loading: lazy;
     }
 
     .gallery-item:hover img {
@@ -1016,7 +1017,7 @@
                   <i class="fas fa-phone"></i>
                   <div class="contact-item-text">
                     <strong>Phone</strong>
-                    <p>(555) 123-4567</p>
+                    <p>074 3264 2168</p>
                   </div>
                 </li>
                 <li class="contact-item">
@@ -1093,8 +1094,8 @@
           <div class="footer-col">
             <h4>Contact</h4>
             <p><i class="fas fa-envelope"></i> info@shinelylimited.com</p>
-            <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-            <p><i class="fas fa-map-marker-alt"></i> Your City, Country</p>
+            <p><i class="fas fa-phone"></i>074 3264 2168</p>
+            <p><i class="fas fa-map-marker-alt"></i> Cardiff , United Kingdom</p>
           </div>
         </div>
         <p class="copyright">© 2024 SHINELY LIMITED. All Rights Reserved.</p>
@@ -1217,94 +1218,43 @@
             isValid = false;
           }
 
-          // If valid, show success message and reset form
+          // If valid, send to Google Apps Script
           if (isValid) {
-            formSuccess.classList.add('show');
-            contactForm.reset();
-            // Scroll to success message
-            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-        });
-      }
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
 
-        // Form Validation and Submission
-      if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-          e.preventDefault();
+            const formData = {
+              name: name,
+              email: email,
+              phone: phone,
+              message: message
+            };
 
-          // Get form values
-          const name = document.getElementById('name').value.trim();
-          const email = document.getElementById('email').value.trim();
-          const phone = document.getElementById('phone').value.trim();
-          const message = document.getElementById('message').value.trim();
+            const CONTACT_APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
-          // Reset error messages
-          document.querySelectorAll('.form-error').forEach(error => {
-            error.classList.remove('show');
-          });
-          formSuccess.classList.remove('show');
-
-          // Validation
-          let isValid = true;
-
-          if (!name) {
-            document.getElementById('nameError').classList.add('show');
-            isValid = false;
-          }
-
-          if (!email || !isValidEmail(email)) {
-            document.getElementById('emailError').classList.add('show');
-            isValid = false;
-          }
-
-          if (phone && !isValidPhone(phone)) {
-            document.getElementById('phoneError').classList.add('show');
-            isValid = false;
-          }
-
-          if (!message) {
-            document.getElementById('messageError').classList.add('show');
-            isValid = false;
-          }
-
-          // If valid, send via Google Apps Script
-          if (isValid) {
-            // Update button state
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            // GOOGLE APPS SCRIPT WEB APP URL
-            // REPLACE THIS URL WITH YOUR DEPLOYED WEB APP URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwA73LwbSNFSq9P9S-KfQTfz8jwLVpOos5iXHXIakMHx6NWsrTxwAfWB0Bezxq8gKjp/exec';
-
-            fetch(scriptURL, {
+            fetch(CONTACT_APPS_SCRIPT_URL, {
               method: 'POST',
-              mode: 'no-cors', // Important for Google Apps Script
-              cache: 'no-cache',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                name: name,
-                email: email,
-                phone: phone,
-                message: message
-              })
+              body: JSON.stringify(formData)
             })
-            .then(() => {
-              // Show success message and reset form
-              formSuccess.classList.add('show');
-              contactForm.reset();
-              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            .then(response => response.json())
+            .then(data => {
+              if (data.status === 'success') {
+                formSuccess.classList.add('show');
+                contactForm.reset();
+                formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              } else {
+                alert('Error: ' + data.message);
+              }
             })
             .catch(error => {
-              console.error('Error!', error.message);
-              alert('There was an error sending your message. Please try again later.');
+              console.error('Error:', error);
+              alert('An error occurred while sending your message. Please try again.');
             })
             .finally(() => {
-              submitBtn.textContent = originalBtnText;
-              submitBtn.disabled = false;
+              submitButton.textContent = originalButtonText;
+              submitButton.disabled = false;
             });
           }
         });
