@@ -8,7 +8,7 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\'ll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
@@ -57,7 +57,7 @@
     }
 
     body {
-      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
+      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -505,7 +505,7 @@
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\'ll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
 
             <form id="quoteForm">
               <div class="form-grid">
@@ -566,7 +566,7 @@
                 <textarea id="details" placeholder="Any specific requests or access instructions..."></textarea>
               </div>
 
-              <button type="submit" class="btn btn-red">Submit Request</button>
+              <button type="submit" class="btn btn-red" id="submitBtn">Submit Request</button>
             </form>
           </div>
 
@@ -582,7 +582,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We\'ll get back to you within 24 hours with a personalized quote.</p>
+                <p>We'll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -643,180 +643,96 @@
   </div>
 
   <script>
-    // Form validation functions
-    function isValidEmail(email) {
-      const emailRegex = /^[\S+@\S+\.\S+]+$/;
-      return emailRegex.test(email);
-    }
+    // 1. DOM ELEMENTS
+    const header = document.querySelector('header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.querySelector('.main-nav ul');
+    const quoteForm = document.getElementById('quoteForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('submitBtn');
 
-    function isValidPhone(phone) {
-      // Basic validation for at least 7 digits, allowing spaces, hyphens, and parentheses
-      const phoneRegex = /^[\d\s\-\+\(\)]{7,}$/;
-      return phoneRegex.test(phone);
-    }
-
-    // DOM Elements
-    const header = document.querySelector(\'header\');
-    const menuToggle = document.querySelector(\'.menu-toggle\');
-    const mainNav = document.querySelector(\'.main-nav ul\');
-    const quoteForm = document.getElementById(\'quoteForm\');
-    const formSuccess = document.getElementById(\'formSuccess\');
-
-    // Mobile Menu Toggle with Hamburger Animation
+    // 2. MOBILE MENU
     if (menuToggle && mainNav) {
-      menuToggle.addEventListener(\'click\', () => {
-        const isOpen = mainNav.classList.toggle(\'open\');
-        menuToggle.classList.toggle(\'active\', isOpen);
-        menuToggle.setAttribute(\'aria-expanded\', isOpen);
-        document.body.classList.toggle(\'no-scroll\', isOpen);
-      });
-
-      mainNav.querySelectorAll(\'a\').forEach(link => {
-        link.addEventListener(\'click\', () => {
-          mainNav.classList.remove(\'open\');
-          menuToggle.classList.remove(\'active\');
-          menuToggle.setAttribute(\'aria-expanded\', \'false\');
-          document.body.classList.remove(\'no-scroll\');
-        });
-      });
-
-      document.addEventListener(\'click\', (e) => {
-        if (!header.contains(e.target) && mainNav.classList.contains(\'open\')) {
-          mainNav.classList.remove(\'open\');
-          menuToggle.classList.remove(\'active\');
-          menuToggle.setAttribute(\'aria-expanded\', \'false\');
-          document.body.classList.remove(\'no-scroll\');
-        }
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        menuToggle.classList.toggle('active', isOpen);
+        document.body.classList.toggle('no-scroll', isOpen);
       });
     }
 
-    // Header Scroll Effect
-    window.addEventListener(\'scroll\', () => {
-      if (window.scrollY > 50) {
-        header.classList.add(\'scrolled\');
-      } else {
-        header.classList.remove(\'scrolled\');
-      }
+    // 3. HEADER SCROLL
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     });
 
-    // Smooth Scroll Offset for Sticky Header
-    document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
-      anchor.addEventListener(\'click\', function (e) {
-        const href = this.getAttribute(\'href\');
-        if (href !== \'#\' && document.querySelector(href)) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          const headerHeight = header.offsetHeight;
-          const targetPosition = target.offsetTop - headerHeight - 20;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: \'smooth\'
-          });
-        }
-      });
-    });
-
-    // Form Validation and Submission with Google Apps Script Integration
+    // 4. FORM SUBMISSION (NO-CORS COMPATIBLE METHOD)
     if (quoteForm) {
-      quoteForm.addEventListener(\'submit\', async (e) => {
+      quoteForm.addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // Get form values
-        const name = document.getElementById(\'name\').value.trim();
-        const email = document.getElementById(\'email\').value.trim();
-        const phone = document.getElementById(\'phone\').value.trim();
-        const address = document.getElementById(\'address\').value.trim();
-        const service = document.getElementById(\'service\').value;
-        const size = document.getElementById(\'size\').value;
-        const details = document.getElementById(\'details\').value.trim();
-
-        // Reset error messages
-        document.querySelectorAll(\'.form-error\').forEach(error => {
-          error.classList.remove(\'show\');
-        });
-        formSuccess.classList.remove(\'show\');
-
+        
         // Validation
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const service = document.getElementById('service').value;
+        
+        // Reset error messages
+        document.querySelectorAll('.form-error').forEach(error => {
+          error.classList.remove('show');
+        });
+
         let isValid = true;
+        if (!name) { document.getElementById('nameError').classList.add('show'); isValid = false; }
+        if (!email) { document.getElementById('emailError').classList.add('show'); isValid = false; }
+        if (!phone) { document.getElementById('phoneError').classList.add('show'); isValid = false; }
+        if (!address) { document.getElementById('addressError').classList.add('show'); isValid = false; }
+        if (!service) { document.getElementById('serviceError').classList.add('show'); isValid = false; }
 
-        if (!name) {
-          document.getElementById(\'nameError\').classList.add(\'show\');
-          isValid = false;
-        }
+        if (!isValid) return;
 
-        if (!email || !isValidEmail(email)) {
-          document.getElementById(\'emailError\').classList.add(\'show\');
-          isValid = false;
-        }
+        // Prepare data
+        const formData = {
+          name: name,
+          email: email,
+          phone: phone,
+          address: address,
+          service: service,
+          size: document.getElementById('size').value,
+          details: document.getElementById('details').value.trim()
+        };
 
-        if (!phone || !isValidPhone(phone)) {
-          document.getElementById(\'phoneError\').classList.add(\'show\');
-          isValid = false;
-        }
-
-        if (!address) {
-          document.getElementById(\'addressError\').classList.add(\'show\');
-          isValid = false;
-        }
-
-        if (!service) {
-          document.getElementById(\'serviceError\').classList.add(\'show\');
-          isValid = false;
-        }
-
-        if (!isValid) {
-          return; // Stop submission if validation fails
-        }
-
-        const submitBtn = quoteForm.querySelector(\'button[type="submit"]\');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = \'Submitting...\';
+        // Update UI
         submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
 
-        try {
-          // IMPORTANT: Replace YOUR_DEPLOYMENT_ID with your actual Google Apps Script deployment ID
-          // The URL format should be: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
-          const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyf6cdgJ1ONAxnVIC72Fx704DqMleCH-MH7pA_2UQS7Yu7N1DslX3g4ZvdqLkd_pOUvuw/exec'; // Placeholder for user to update
-          
-          const formData = {
-            name: name,
-            email: email,
-            phone: phone,
-            address: address,
-            service: service,
-            size: size,
-            details: details
-          };
+        // GOOGLE APPS SCRIPT URL - REPLACE THIS WITH YOUR DEPLOYMENT URL
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyf6cdgJ1ONAxnVIC72Fx704DqMleCH-MH7pA_2UQS7Yu7N1DslX3g4ZvdqLkd_pOUvuw/exec';
 
-          const response = await fetch(APPS_SCRIPT_URL, {
-            method: \'POST\',
-            mode: \'cors\', // Ensure CORS is enabled
-            cache: \'no-cache\',
-            headers: {
-              \'Content-Type\': \'application/json\'
-            },
-            redirect: \'follow\',
-            referrerPolicy: \'no-referrer\',
-            body: JSON.stringify(formData)
-          });
-
-          const result = await response.json();
-
-          if (result.status === \'success\') {
-            formSuccess.classList.add(\'show\');
-            quoteForm.reset();
-            formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'nearest\' });
-          } else {
-            alert(\'Error submitting form: \' + result.message);
-            console.error(\'Apps Script Error:\', result.message);
-          }
-        } catch (error) {
-          console.error(\'Form submission error:\', error);
-          alert(\'An unexpected error occurred. Please try again later.\');
-        } finally {
-          submitBtn.textContent = originalText;
+        // Using fetch with no-cors to bypass browser preflight issues
+        fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Crucial for Google Apps Script redirects
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(() => {
+          // Success UI
+          formSuccess.classList.add('show');
+          quoteForm.reset();
+          submitBtn.textContent = 'Submitted Successfully';
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(err => {
+          console.error('Submission error:', err);
+          alert('There was an error. Please try again or contact us directly.');
           submitBtn.disabled = false;
-        }
+          submitBtn.textContent = 'Submit Request';
+        });
       });
     }
   </script>
