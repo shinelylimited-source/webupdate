@@ -8,7 +8,7 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\"ll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
@@ -57,7 +57,7 @@
     }
 
     body {
-      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
+      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -505,8 +505,9 @@
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\"ll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
 
+            <!-- FOOLPROOF IFRAME SUBMISSION METHOD -->
             <form id="quoteForm" target="_hidden_iframe" method="POST">
               <div class="form-grid">
                 <div class="form-group">
@@ -582,7 +583,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We\"ll get back to you within 24 hours with a personalized quote.</p>
+                <p>We'll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -643,123 +644,96 @@
   </div>
 
   <!-- Hidden iframe for form submission -->
-  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;" onload="if(submitted) { handleIframeLoad(); }"></iframe>
+  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;" onload="if(window.submitted) { handleIframeLoad(); }"></iframe>
 
   <script>
+    // 🔑 REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygS0cXNF0bASDQLPZ5jHCwzoyEAJMwIcJEvz-5a44KMb-tIy3HN9jgE-RLKWjbVTv6/exec';
+
     // 1. DOM ELEMENTS
-    const header = document.querySelector(\'header\');
-    const menuToggle = document.querySelector(\".menu-toggle\");
-    const mainNav = document.querySelector(\".main-nav ul\");
-    const quoteForm = document.getElementById(\'quoteForm\');
-    const formSuccess = document.getElementById(\'formSuccess\');
-    const submitBtn = document.getElementById(\'submitBtn\');
-    let submitted = false; // Flag to track if form has been submitted
+    const header = document.querySelector('header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.querySelector('.main-nav ul');
+    const quoteForm = document.getElementById('quoteForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('submitBtn');
+    window.submitted = false; // Global flag for iframe onload
 
     // 2. MOBILE MENU
     if (menuToggle && mainNav) {
-      menuToggle.addEventListener(\'click\', () => {
-        const isOpen = mainNav.classList.toggle(\'open\');
-        menuToggle.classList.toggle(\'active\', isOpen);
-        document.body.classList.toggle(\'no-scroll\', isOpen);
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        menuToggle.classList.toggle('active', isOpen);
+        document.body.classList.toggle('no-scroll', isOpen);
       });
     }
 
     // 3. HEADER SCROLL
-    window.addEventListener(\'scroll\', () => {
-      if (window.scrollY > 50) header.classList.add(\'scrolled\');
-      else header.classList.remove(\'scrolled\');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     });
 
     // 4. FORM SUBMISSION (IFRAME METHOD)
     if (quoteForm) {
-      quoteForm.addEventListener(\'submit\', function(e) {
-        // Reset messages and button state on new submission attempt
-        formSuccess.classList.remove(\'show\');
-        document.querySelectorAll(\".form-error\").forEach(error => {
-          error.classList.remove(\'show\');
+      quoteForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // CRITICAL: Prevent default form submission
+
+        // Reset messages and button state
+        formSuccess.classList.remove('show');
+        document.querySelectorAll('.form-error').forEach(error => {
+          error.classList.remove('show');
         });
 
         // Validation
-        const name = document.getElementById(\'name\').value.trim();
-        const email = document.getElementById(\'email\').value.trim();
-        const phone = document.getElementById(\'phone\').value.trim();
-        const address = document.getElementById(\'address\').value.trim();
-        const service = document.getElementById(\'service\').value;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const service = document.getElementById('service').value;
         
         let isValid = true;
-        if (!name) { document.getElementById(\'nameError\').classList.add(\'show\'); isValid = false; }
-        if (!email) { document.getElementById(\'emailError\').classList.add(\'show\'); isValid = false; }
-        if (!phone) { document.getElementById(\'phoneError\').classList.add(\'show\'); isValid = false; }
-        if (!address) { document.getElementById(\'addressError\').classList.add(\'show\'); isValid = false; }
-        if (!service) { document.getElementById(\'serviceError\').classList.add(\'show\'); isValid = false; }
+        if (!name) { document.getElementById('nameError').classList.add('show'); isValid = false; }
+        if (!email) { document.getElementById('emailError').classList.add('show'); isValid = false; }
+        if (!phone) { document.getElementById('phoneError').classList.add('show'); isValid = false; }
+        if (!address) { document.getElementById('addressError').classList.add('show'); isValid = false; }
+        if (!service) { document.getElementById('serviceError').classList.add('show'); isValid = false; }
 
         if (!isValid) {
-          e.preventDefault(); // Prevent submission if validation fails
-          return;
+          return; // Stop if validation fails
         }
 
         // Set form action to Google Apps Script Web App URL
-        // IMPORTANT: REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-        quoteForm.action = https://script.google.com/macros/s/AKfycbygS0cXNF0bASDQLPZ5jHCwzoyEAJMwIcJEvz-5a44KMb-tIy3HN9jgE-RLKWjbVTv6/exec'; 
+        quoteForm.action = WEB_APP_URL;
 
         // Update UI
         submitBtn.disabled = true;
-        submitBtn.textContent = \'Submitting...\';
-        submitted = true; // Set flag for iframe onload
+        submitBtn.textContent = 'Submitting...';
+        window.submitted = true; // Set global flag for iframe onload
+
+        // Submit the form
+        quoteForm.submit();
       });
     }
 
-    // Function to handle response from Google Apps Script via iframe
+    // Function to handle response from iframe
     function handleIframeLoad() {
-      if (!submitted) return; // Only run if form was actually submitted
+      if (!window.submitted) return;
 
-      const iframe = document.getElementById(\'_hidden_iframe\');
-      let responseText = \'\';
-      try {
-        // Attempt to read content from iframe (may be blocked by CORS if script returns JSON)
-        // For Google Apps Script returning HtmlService, this works better.
-        responseText = iframe.contentDocument.body.innerText;
-      } catch (e) {
-        console.warn(\'Could not read iframe content directly (CORS/security restriction):\', e);
-        // Fallback: assume success if no direct error from iframe itself
-        responseText = \'SUCCESS\'; 
-      }
+      // Success UI
+      formSuccess.classList.add('show');
+      quoteForm.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submitted Successfully';
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       
-      console.log(\'Iframe response (simulated/actual):\', responseText);
-
-      // Check for success message from Apps Script
-      if (responseText.includes(\'SUCCESS\')) {
-        formSuccess.classList.add(\'show\');
-        quoteForm.reset();
-        submitBtn.textContent = \'Submitted Successfully\';
-        formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'center\' });
-      } else {
-        alert(\'There was an error submitting your form. Please try again or contact us directly.\');
-        submitBtn.textContent = \'Submit Request\';
-      }
-      submitBtn.disabled = false;
-      submitted = false; // Reset flag
+      // Reset button text after 5 seconds
+      setTimeout(() => {
+        submitBtn.textContent = 'Submit Request';
+      }, 5000);
+      
+      window.submitted = false;
     }
-
-    // Listen for messages from the iframe (Apps Script can send postMessage)
-    window.addEventListener(\'message\', function(event) {
-      // IMPORTANT: Restrict event.origin in production for security
-      // For Google Apps Script, the origin will be script.google.com
-      // if (event.origin !== \'https://script.google.com\') return;
-
-      if (event.data === \'SUCCESS\') {
-        formSuccess.classList.add(\'show\');
-        quoteForm.reset();
-        submitBtn.textContent = \'Submitted Successfully\';
-        formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'center\' });
-      } else if (event.data.startsWith(\'ERROR\')) {
-        alert(\'There was an error submitting your form: \' + event.data);
-        submitBtn.textContent = \'Submit Request\';
-      }
-      submitBtn.disabled = false;
-      submitted = false; // Reset flag
-    });
-
   </script>
 </body>
 </html>
