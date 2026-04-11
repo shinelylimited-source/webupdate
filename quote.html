@@ -660,7 +660,7 @@
 <!---  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;"></iframe> ---->
 
   <script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxvuC4IJOWdjSUuVLLLQqF-ysDAwQ8jfxLVIeKgwXi69abgR7xUDqmsvCJpejs8ZGc/exec'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbytC0ZLW_zdz6iN1Uxxg3cC1aJzCY4nXz2rEiMMS5OoQ4iUqOGf74huAjDedrIEHsa3/exec'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
 
   const quoteForm = document.getElementById('quoteForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -704,14 +704,15 @@
       formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged.';
       formSuccess.style.display = 'block';
       quoteForm.reset();
-      submitBtn.textContent = 'Submitted Successfully!';
       
-      // 2. AUTO-RESET: After 5 seconds, clear the message and reset the button
+      // 2. BUTTON RESET: Change text back to "Submit Request" immediately after success
+      submitBtn.textContent = 'Submit Request';
+      submitBtn.disabled = false; // Re-enable so it's ready
+      
+      // 3. AUTO-REFRESH: After 3 seconds, refresh the page to clear everything
       setTimeout(() => {
-        formSuccess.style.display = 'none';
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
-      }, 5000); // 5000ms = 5 seconds
+        window.location.reload();
+      }, 3000); // 3000ms = 3 seconds
     })
     .catch(err => {
       console.error(err);
