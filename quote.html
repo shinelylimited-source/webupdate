@@ -8,14 +8,14 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\'ll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
   <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
-  <!-- Font Awesome Icons (moved to head for better performance) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Font Awesome Icons (integrity attribute removed to fix CSP error) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <style>
     :root {
@@ -57,7 +57,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -498,14 +498,14 @@
       <!-- Quote Form Section -->
       <section id="quote-form">
         <div class="container">
-          <div id="formSuccess" class="form-success">
+          <div class="form-success" id="formSuccess">
             <strong>✅ Quote Request Submitted Successfully!</strong>
             <p>Thank you for your request. A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours with a personalized quote.</p>
           </div>
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\'ll get back to you within 24 hours</p>
 
             <form id="quoteForm">
               <div class="form-grid">
@@ -582,7 +582,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We'll get back to you within 24 hours with a personalized quote.</p>
+                <p>We\'ll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -645,71 +645,72 @@
   <script>
     // Form validation functions
     function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[\S+@\S+\.\S+]+$/;
       return emailRegex.test(email);
     }
 
     function isValidPhone(phone) {
-      const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
-      return phoneRegex.test(phone.replace(/\s/g, ''));
+      // Basic validation for at least 7 digits, allowing spaces, hyphens, and parentheses
+      const phoneRegex = /^[\d\s\-\+\(\)]{7,}$/;
+      return phoneRegex.test(phone);
     }
 
     // DOM Elements
-    const header = document.querySelector('header');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav ul');
-    const quoteForm = document.getElementById('quoteForm');
-    const formSuccess = document.getElementById('formSuccess');
+    const header = document.querySelector(\'header\');
+    const menuToggle = document.querySelector(\'.menu-toggle\');
+    const mainNav = document.querySelector(\'.main-nav ul\');
+    const quoteForm = document.getElementById(\'quoteForm\');
+    const formSuccess = document.getElementById(\'formSuccess\');
 
     // Mobile Menu Toggle with Hamburger Animation
     if (menuToggle && mainNav) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = mainNav.classList.toggle('open');
-        menuToggle.classList.toggle('active', isOpen);
-        menuToggle.setAttribute('aria-expanded', isOpen);
-        document.body.classList.toggle('no-scroll', isOpen);
+      menuToggle.addEventListener(\'click\', () => {
+        const isOpen = mainNav.classList.toggle(\'open\');
+        menuToggle.classList.toggle(\'active\', isOpen);
+        menuToggle.setAttribute(\'aria-expanded\', isOpen);
+        document.body.classList.toggle(\'no-scroll\', isOpen);
       });
 
-      mainNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mainNav.classList.remove('open');
-          menuToggle.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          document.body.classList.remove('no-scroll');
+      mainNav.querySelectorAll(\'a\').forEach(link => {
+        link.addEventListener(\'click\', () => {
+          mainNav.classList.remove(\'open\');
+          menuToggle.classList.remove(\'active\');
+          menuToggle.setAttribute(\'aria-expanded\', \'false\');
+          document.body.classList.remove(\'no-scroll\');
         });
       });
 
-      document.addEventListener('click', (e) => {
-        if (!header.contains(e.target) && mainNav.classList.contains('open')) {
-          mainNav.classList.remove('open');
-          menuToggle.classList.remove('active');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          document.body.classList.remove('no-scroll');
+      document.addEventListener(\'click\', (e) => {
+        if (!header.contains(e.target) && mainNav.classList.contains(\'open\')) {
+          mainNav.classList.remove(\'open\');
+          menuToggle.classList.remove(\'active\');
+          menuToggle.setAttribute(\'aria-expanded\', \'false\');
+          document.body.classList.remove(\'no-scroll\');
         }
       });
     }
 
     // Header Scroll Effect
-    window.addEventListener('scroll', () => {
+    window.addEventListener(\'scroll\', () => {
       if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+        header.classList.add(\'scrolled\');
       } else {
-        header.classList.remove('scrolled');
+        header.classList.remove(\'scrolled\');
       }
     });
 
     // Smooth Scroll Offset for Sticky Header
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
+    document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
+      anchor.addEventListener(\'click\', function (e) {
+        const href = this.getAttribute(\'href\');
+        if (href !== \'#\' && document.querySelector(href)) {
           e.preventDefault();
           const target = document.querySelector(href);
           const headerHeight = header.offsetHeight;
           const targetPosition = target.offsetTop - headerHeight - 20;
           window.scrollTo({
             top: targetPosition,
-            behavior: 'smooth'
+            behavior: \'smooth\'
           });
         }
       });
@@ -717,101 +718,104 @@
 
     // Form Validation and Submission with Google Apps Script Integration
     if (quoteForm) {
-      quoteForm.addEventListener('submit', async (e) => {
+      quoteForm.addEventListener(\'submit\', async (e) => {
         e.preventDefault();
 
         // Get form values
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const service = document.getElementById('service').value;
-        const size = document.getElementById('size').value;
-        const details = document.getElementById('details').value.trim();
+        const name = document.getElementById(\'name\').value.trim();
+        const email = document.getElementById(\'email\').value.trim();
+        const phone = document.getElementById(\'phone\').value.trim();
+        const address = document.getElementById(\'address\').value.trim();
+        const service = document.getElementById(\'service\').value;
+        const size = document.getElementById(\'size\').value;
+        const details = document.getElementById(\'details\').value.trim();
 
         // Reset error messages
-        document.querySelectorAll('.form-error').forEach(error => {
-          error.classList.remove('show');
+        document.querySelectorAll(\'.form-error\').forEach(error => {
+          error.classList.remove(\'show\');
         });
-        formSuccess.classList.remove('show');
+        formSuccess.classList.remove(\'show\');
 
         // Validation
         let isValid = true;
 
         if (!name) {
-          document.getElementById('nameError').classList.add('show');
+          document.getElementById(\'nameError\').classList.add(\'show\');
           isValid = false;
         }
 
         if (!email || !isValidEmail(email)) {
-          document.getElementById('emailError').classList.add('show');
+          document.getElementById(\'emailError\').classList.add(\'show\');
           isValid = false;
         }
 
         if (!phone || !isValidPhone(phone)) {
-          document.getElementById('phoneError').classList.add('show');
+          document.getElementById(\'phoneError\').classList.add(\'show\');
           isValid = false;
         }
 
         if (!address) {
-          document.getElementById('addressError').classList.add('show');
+          document.getElementById(\'addressError\').classList.add(\'show\');
           isValid = false;
         }
 
         if (!service) {
-          document.getElementById('serviceError').classList.add('show');
+          document.getElementById(\'serviceError\').classList.add(\'show\');
           isValid = false;
         }
 
-        // If valid, submit to Google Apps Script
-        if (isValid) {
-          const submitBtn = quoteForm.querySelector('button[type="submit"]');
-          const originalText = submitBtn.textContent;
-          submitBtn.textContent = 'Submitting...';
-          submitBtn.disabled = true;
+        if (!isValid) {
+          return; // Stop submission if validation fails
+        }
 
-          try {
-            // IMPORTANT: Replace YOUR_DEPLOYMENT_ID with your actual Google Apps Script deployment ID
-            // The URL format should be: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
-            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVaYx8QA2twOOKxY7sS62P-3klK-Nptid_FuPdNYaMiFsiq5-9R0b2_65lwACjnXoLNw/exec';
-            
-            const formData = {
-              name: name,
-              email: email,
-              phone: phone,
-              address: address,
-              service: service,
-              size: size,
-              details: details
-            };
+        const submitBtn = quoteForm.querySelector(\'button[type="submit"]\');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = \'Submitting...\';
+        submitBtn.disabled = true;
 
-            const response = await fetch(APPS_SCRIPT_URL, {
-              method: 'POST',
-              body: JSON.stringify(formData),
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            });
+        try {
+          // IMPORTANT: Replace YOUR_DEPLOYMENT_ID with your actual Google Apps Script deployment ID
+          // The URL format should be: https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+          const APPS_SCRIPT_URL = \'YOUR_WEB_APP_URL_HERE\'; // Placeholder for user to update
+          
+          const formData = {
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            service: service,
+            size: size,
+            details: details
+          };
 
-            const result = await response.json();
+          const response = await fetch(APPS_SCRIPT_URL, {
+            method: \'POST\',
+            mode: \'cors\', // Ensure CORS is enabled
+            cache: \'no-cache\',
+            headers: {
+              \'Content-Type\': \'application/json\'
+            },
+            redirect: \'follow\',
+            referrerPolicy: \'no-referrer\',
+            body: JSON.stringify(formData)
+          });
 
-            if (result.status === 'success') {
-              formSuccess.classList.add('show');
-              quoteForm.reset();
-              formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-              alert('Error: ' + result.message);
-            }
-          } catch (error) {
-            console.error('Form submission error:', error);
-            // Show success anyway - the form may have been submitted even if we can't confirm
-            formSuccess.classList.add('show');
+          const result = await response.json();
+
+          if (result.status === \'success\') {
+            formSuccess.classList.add(\'show\');
             quoteForm.reset();
-            formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'nearest\' });
+          } else {
+            alert(\'Error submitting form: \' + result.message);
+            console.error(\'Apps Script Error:\', result.message);
           }
+        } catch (error) {
+          console.error(\'Form submission error:\', error);
+          alert(\'An unexpected error occurred. Please try again later.\');
+        } finally {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
         }
       });
     }
