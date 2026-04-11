@@ -660,47 +660,47 @@
   <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;"></iframe>
 
   <script>
-    // --- ORIGINAL JAVASCRIPT FROM QUOTE(6).HTML ---
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxvuC4IJOWdjSUuVLLLQqF-ysDAwQ8jfxLVIeKgwXi69abgR7xUDqmsvCJpejs8ZGc/exec'; 
-    
-    const quoteForm = document.getElementById('quoteForm');
-    const formSuccess = document.getElementById('formSuccess');
-    const formErrorSummary = document.getElementById('formErrorSummary');
-    const submitBtn = document.getElementById('submitBtn');
-    const header = document.querySelector('header');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav ul');
+  
+  // 1. CONFIGURATION
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxvuC4IJOWdjSUuVLLLQqF-ysDAwQ8jfxLVIeKgwXi69abgR7xUDqmsvCJpejs8ZGc/exec'; // <--- REPLACE THIS with your Google Apps Script Web App URL
+  
+  const quoteForm = document.getElementById('quoteForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const formErrorSummary = document.getElementById('formErrorSummary');
+  const submitBtn = document.getElementById('submitBtn');
+  const header = document.querySelector('header');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mainNav = document.querySelector('.main-nav ul');
 
-    // Mobile menu toggle
-    if (menuToggle && mainNav) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = mainNav.classList.toggle('open');
-        menuToggle.classList.toggle('active', isOpen);
-        document.body.classList.toggle('no-scroll', isOpen);
-      });
-    }
+  // 2. UI HELPERS (Mobile menu and header scroll effects)
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.classList.toggle('active', isOpen);
+      document.body.classList.toggle('no-scroll', isOpen);
+    });
+  }
 
-    // Header scroll effect
-    if (header) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-      });
-    }
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+  }
 
-    // Attach iframe load listener
-    const iframe = document.getElementById('_hidden_iframe');
-    iframe.addEventListener('load', handleIframeLoad);
-
-    quoteForm.addEventListener('submit', function(e) {
-      e.preventDefault(); 
+  // 3. FORM SUBMISSION LOGIC (using Fetch API)
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Prevent default form submission
       
+      // Reset messages and button state on new submission attempt
       formSuccess.style.display = 'none';
       formErrorSummary.style.display = 'none';
       document.querySelectorAll(".form-error").forEach(error => {
         error.style.display = 'none';
       });
 
+      // Client-side Validation
       let isValid = true;
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -720,65 +720,47 @@
         return;
       }
 
-      quoteForm.action = WEB_APP_URL; 
+      // Prepare form data for submission
+      const formData = new FormData(quoteForm);
+      const data = {};
+      for (let [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+
+      // Update UI for submission
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
-      quoteForm.submit();
-    });
 
-    function handleIframeLoad() {
-      if (!submitBtn.disabled && submitBtn.textContent !== 'Submitting...') {
-        return;
-      }
-
-      let responseData = null;
       try {
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        const scriptTag = iframeDoc.querySelector('script');
-        if (scriptTag) {
-          const scriptContent = scriptTag.textContent;
-          const match = scriptContent.match(/window\.parent\.postMessage\((\{.*?\})\s*,\s*\'*\'*\);/);
-          if (match && match[1]) {
-            responseData = JSON.parse(match[1]);
-          }
-        }
-      } catch (e) {
-        console.error('Error parsing iframe response:', e);
-      }
-      
-      if (responseData && responseData.status === 'SUCCESS') {
-        formSuccess.innerHTML = '<strong>✅ Quote Request Submitted Successfully!</strong><p>' + (responseData.message || 'A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours.') + '</p>';
+        // Use fetch with 'no-cors' mode
+        const response = await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Crucial for Google Apps Script redirects and bypassing CORS issues
+          cache: 'no-cache',
+          // 'Content-Type': 'application/x-www-form-urlencoded' is often used with FormData,
+          // but 'no-cors' mode restricts setting custom headers. The browser will set it correctly.
+          body: new URLSearchParams(data).toString() // Send as URL-encoded form data
+        });
+
+        // In 'no-cors' mode, 'response.ok' is always true and 'response.status' is always 0 for cross-origin opaque responses.
+        // We optimistically assume success if no network error occurred.
+        formSuccess.innerHTML = '<strong>✅ Quote Request Submitted Successfully!</strong><p>Our team will review your request and get back to you within 24 hours.</p>';
         formSuccess.style.display = 'block';
+        formSuccess.classList.add('show');
         quoteForm.reset();
         submitBtn.textContent = 'Submitted Successfully';
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        formErrorSummary.textContent = responseData ? responseData.message : '⚠️ There was an error submitting your form. Please try again or contact us directly.';
+
+      } catch (error) {
+        console.error('Submission error:', error);
+        formErrorSummary.textContent = '⚠️ There was a network error submitting your form. Please try again.';
         formErrorSummary.style.display = 'block';
+        submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Request';
         formErrorSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      submitBtn.disabled = false;
-    }
-
-    window.addEventListener('message', function(event) {
-      const responseData = event.data;
-      if (typeof responseData === 'object' && responseData.status) {
-        if (responseData.status === 'SUCCESS') {
-          formSuccess.innerHTML = '<strong>✅ Quote Request Submitted Successfully!</strong><p>' + (responseData.message || 'A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours.') + '</p>';
-          formSuccess.style.display = 'block';
-          quoteForm.reset();
-          submitBtn.textContent = 'Submitted Successfully';
-          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else if (responseData.status === 'ERROR') {
-          formErrorSummary.textContent = responseData.message || '⚠️ There was an error submitting your form. Please try again or contact us directly.';
-          formErrorSummary.style.display = 'block';
-          submitBtn.textContent = 'Submit Request';
-          formErrorSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        submitBtn.disabled = false;
-      }
     });
-  </script>
+  }
+</script>
 </body>
 </html>
