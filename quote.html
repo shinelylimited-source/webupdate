@@ -661,7 +661,7 @@
 
   <script>
  
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbytC0ZLW_zdz6iN1Uxxg3cC1aJzCY4nXz2rEiMMS5OoQ4iUqOGf74huAjDedrIEHsa3/exec'; // <--- PASTE THE NEW URL FROM STEP 2
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzaUFdiRR8I9pNWSxJCwgbowPK0f0lVRjW3E-F_A-azrOPPgTZhGju1EARXinI0PiZv/exec'; // <--- PASTE THE NEW URL FROM STEP 2
 
   const quoteForm = document.getElementById('quoteForm');
   const submitBtn = document.getElementById('submitBtn');
@@ -698,7 +698,7 @@
     const service = document.getElementById('service').value;
 
     if (!name) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
-    if (!email || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
+    if (!email || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
     if (!phone) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
     if (!address) { document.getElementById('addressError').style.display = 'block'; isValid = false; }
     if (!service) { document.getElementById('serviceError').style.display = 'block'; isValid = false; }
@@ -713,6 +713,7 @@
     submitBtn.textContent = 'Sending...';
     
     // Use FormData directly from the form for robust submission
+    // This ensures all input fields with a 'name' attribute are included.
     const formData = new FormData(quoteForm);
 
     fetch(WEB_APP_URL, {
@@ -742,7 +743,7 @@
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Request';
     });
-  });
+  });  
 </script>
 </body>
 </html>
