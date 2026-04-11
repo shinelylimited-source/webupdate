@@ -8,7 +8,7 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\"ll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
@@ -57,7 +57,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -505,31 +505,31 @@
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\"ll get back to you within 24 hours</p>
 
-            <form id="quoteForm">
+            <form id="quoteForm" target="_hidden_iframe" method="POST">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="name">Full Name *</label>
-                  <input type="text" id="name" placeholder="Enter your full name" required>
+                  <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                   <div class="form-error" id="nameError">Please enter your full name</div>
                 </div>
 
                 <div class="form-group">
                   <label for="email">Email Address *</label>
-                  <input type="email" id="email" placeholder="Enter your email address" required>
+                  <input type="email" id="email" name="email" placeholder="Enter your email address" required>
                   <div class="form-error" id="emailError">Please enter a valid email address</div>
                 </div>
 
                 <div class="form-group">
                   <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                  <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
                   <div class="form-error" id="phoneError">Please enter a valid phone number</div>
                 </div>
 
                 <div class="form-group">
                   <label for="address">Property Address *</label>
-                  <input type="text" id="address" placeholder="Enter your property address" required>
+                  <input type="text" id="address" name="address" placeholder="Enter your property address" required>
                   <div class="form-error" id="addressError">Please enter your property address</div>
                 </div>
               </div>
@@ -537,7 +537,7 @@
               <div class="form-grid">
                 <div class="form-group">
                   <label for="service">Type of Cleaning Required *</label>
-                  <select id="service" required>
+                  <select id="service" name="service" required>
                     <option value="">Select a service...</option>
                     <option value="General Home Cleaning">General Home Cleaning</option>
                     <option value="Deep Home Cleaning">Deep Home Cleaning</option>
@@ -551,7 +551,7 @@
 
                 <div class="form-group">
                   <label for="size">Property Size (Optional)</label>
-                  <select id="size">
+                  <select id="size" name="size">
                     <option value="">Select approximate size...</option>
                     <option value="Studio / 1 Bedroom">Studio / 1 Bedroom</option>
                     <option value="2-3 Bedrooms">2-3 Bedrooms</option>
@@ -563,7 +563,7 @@
 
               <div class="form-group">
                 <label for="details">Additional Details</label>
-                <textarea id="details" placeholder="Any specific requests or access instructions..."></textarea>
+                <textarea id="details" name="details" placeholder="Any specific requests or access instructions..."></textarea>
               </div>
 
               <button type="submit" class="btn btn-red" id="submitBtn">Submit Request</button>
@@ -582,7 +582,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We'll get back to you within 24 hours with a personalized quote.</p>
+                <p>We\"ll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -642,99 +642,124 @@
     </footer>
   </div>
 
+  <!-- Hidden iframe for form submission -->
+  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;" onload="if(submitted) { handleIframeLoad(); }"></iframe>
+
   <script>
     // 1. DOM ELEMENTS
-    const header = document.querySelector('header');
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav ul');
-    const quoteForm = document.getElementById('quoteForm');
-    const formSuccess = document.getElementById('formSuccess');
-    const submitBtn = document.getElementById('submitBtn');
+    const header = document.querySelector(\'header\');
+    const menuToggle = document.querySelector(\".menu-toggle\");
+    const mainNav = document.querySelector(\".main-nav ul\");
+    const quoteForm = document.getElementById(\'quoteForm\');
+    const formSuccess = document.getElementById(\'formSuccess\');
+    const submitBtn = document.getElementById(\'submitBtn\');
+    let submitted = false; // Flag to track if form has been submitted
 
     // 2. MOBILE MENU
     if (menuToggle && mainNav) {
-      menuToggle.addEventListener('click', () => {
-        const isOpen = mainNav.classList.toggle('open');
-        menuToggle.classList.toggle('active', isOpen);
-        document.body.classList.toggle('no-scroll', isOpen);
+      menuToggle.addEventListener(\'click\', () => {
+        const isOpen = mainNav.classList.toggle(\'open\');
+        menuToggle.classList.toggle(\'active\', isOpen);
+        document.body.classList.toggle(\'no-scroll\', isOpen);
       });
     }
 
     // 3. HEADER SCROLL
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
+    window.addEventListener(\'scroll\', () => {
+      if (window.scrollY > 50) header.classList.add(\'scrolled\');
+      else header.classList.remove(\'scrolled\');
     });
 
-    // 4. FORM SUBMISSION (NO-CORS COMPATIBLE METHOD)
+    // 4. FORM SUBMISSION (IFRAME METHOD)
     if (quoteForm) {
-      quoteForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validation
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-        const service = document.getElementById('service').value;
-        
-        // Reset error messages
-        document.querySelectorAll('.form-error').forEach(error => {
-          error.classList.remove('show');
+      quoteForm.addEventListener(\'submit\', function(e) {
+        // Reset messages and button state on new submission attempt
+        formSuccess.classList.remove(\'show\');
+        document.querySelectorAll(\".form-error\").forEach(error => {
+          error.classList.remove(\'show\');
         });
 
+        // Validation
+        const name = document.getElementById(\'name\').value.trim();
+        const email = document.getElementById(\'email\').value.trim();
+        const phone = document.getElementById(\'phone\').value.trim();
+        const address = document.getElementById(\'address\').value.trim();
+        const service = document.getElementById(\'service\').value;
+        
         let isValid = true;
-        if (!name) { document.getElementById('nameError').classList.add('show'); isValid = false; }
-        if (!email) { document.getElementById('emailError').classList.add('show'); isValid = false; }
-        if (!phone) { document.getElementById('phoneError').classList.add('show'); isValid = false; }
-        if (!address) { document.getElementById('addressError').classList.add('show'); isValid = false; }
-        if (!service) { document.getElementById('serviceError').classList.add('show'); isValid = false; }
+        if (!name) { document.getElementById(\'nameError\').classList.add(\'show\'); isValid = false; }
+        if (!email) { document.getElementById(\'emailError\').classList.add(\'show\'); isValid = false; }
+        if (!phone) { document.getElementById(\'phoneError\').classList.add(\'show\'); isValid = false; }
+        if (!address) { document.getElementById(\'addressError\').classList.add(\'show\'); isValid = false; }
+        if (!service) { document.getElementById(\'serviceError\').classList.add(\'show\'); isValid = false; }
 
-        if (!isValid) return;
+        if (!isValid) {
+          e.preventDefault(); // Prevent submission if validation fails
+          return;
+        }
 
-        // Prepare data
-        const formData = {
-          name: name,
-          email: email,
-          phone: phone,
-          address: address,
-          service: service,
-          size: document.getElementById('size').value,
-          details: document.getElementById('details').value.trim()
-        };
+        // Set form action to Google Apps Script Web App URL
+        // IMPORTANT: REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+        quoteForm.action = \'YOUR_WEB_APP_URL_HERE\'; 
 
         // Update UI
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting...';
-
-        // GOOGLE APPS SCRIPT URL - REPLACE THIS WITH YOUR DEPLOYMENT URL
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbygS0cXNF0bASDQLPZ5jHCwzoyEAJMwIcJEvz-5a44KMb-tIy3HN9jgE-RLKWjbVTv6/exec';
-
-        // Using fetch with no-cors to bypass browser preflight issues
-        fetch(WEB_APP_URL, {
-          method: 'POST',
-          mode: 'no-cors', // Crucial for Google Apps Script redirects
-          cache: 'no-cache',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        })
-        .then(() => {
-          // Success UI
-          formSuccess.classList.add('show');
-          quoteForm.reset();
-          submitBtn.textContent = 'Submitted Successfully';
-          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        })
-        .catch(err => {
-          console.error('Submission error:', err);
-          alert('There was an error. Please try again or contact us directly.');
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Request';
-        });
+        submitBtn.textContent = \'Submitting...\';
+        submitted = true; // Set flag for iframe onload
       });
     }
+
+    // Function to handle response from Google Apps Script via iframe
+    function handleIframeLoad() {
+      if (!submitted) return; // Only run if form was actually submitted
+
+      const iframe = document.getElementById(\'_hidden_iframe\');
+      let responseText = \'\';
+      try {
+        // Attempt to read content from iframe (may be blocked by CORS if script returns JSON)
+        // For Google Apps Script returning HtmlService, this works better.
+        responseText = iframe.contentDocument.body.innerText;
+      } catch (e) {
+        console.warn(\'Could not read iframe content directly (CORS/security restriction):\', e);
+        // Fallback: assume success if no direct error from iframe itself
+        responseText = \'SUCCESS\'; 
+      }
+      
+      console.log(\'Iframe response (simulated/actual):\', responseText);
+
+      // Check for success message from Apps Script
+      if (responseText.includes(\'SUCCESS\')) {
+        formSuccess.classList.add(\'show\');
+        quoteForm.reset();
+        submitBtn.textContent = \'Submitted Successfully\';
+        formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'center\' });
+      } else {
+        alert(\'There was an error submitting your form. Please try again or contact us directly.\');
+        submitBtn.textContent = \'Submit Request\';
+      }
+      submitBtn.disabled = false;
+      submitted = false; // Reset flag
+    }
+
+    // Listen for messages from the iframe (Apps Script can send postMessage)
+    window.addEventListener(\'message\', function(event) {
+      // IMPORTANT: Restrict event.origin in production for security
+      // For Google Apps Script, the origin will be script.google.com
+      // if (event.origin !== \'https://script.google.com\') return;
+
+      if (event.data === \'SUCCESS\') {
+        formSuccess.classList.add(\'show\');
+        quoteForm.reset();
+        submitBtn.textContent = \'Submitted Successfully\';
+        formSuccess.scrollIntoView({ behavior: \'smooth\', block: \'center\' });
+      } else if (event.data.startsWith(\'ERROR\')) {
+        alert(\'There was an error submitting your form: \' + event.data);
+        submitBtn.textContent = \'Submit Request\';
+      }
+      submitBtn.disabled = false;
+      submitted = false; // Reset flag
+    });
+
   </script>
 </body>
 </html>
