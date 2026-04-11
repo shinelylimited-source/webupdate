@@ -660,14 +660,15 @@
 <!---  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;"></iframe> ---->
 
   <script>
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbytC0ZLW_zdz6iN1Uxxg3cC1aJzCY4nXz2rEiMMS5OoQ4iUqOGf74huAjDedrIEHsa3/exec'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+ 
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbytC0ZLW_zdz6iN1Uxxg3cC1aJzCY4nXz2rEiMMS5OoQ4iUqOGf74huAjDedrIEHsa3/exec'; // <--- PASTE THE NEW URL FROM STEP 2
 
   const quoteForm = document.getElementById('quoteForm');
   const submitBtn = document.getElementById('submitBtn');
   const formSuccess = document.getElementById('formSuccess');
   const formErrorSummary = document.getElementById('formErrorSummary');
 
-  // Simple Header/Menu Logic
+  // Simple Header/Menu Logic (from previous versions)
   const menuToggle = document.querySelector('.menu-toggle');
   const mainNav = document.querySelector('.main-nav ul');
   if (menuToggle) {
@@ -681,42 +682,62 @@
   quoteForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
+    // Reset messages and button state on new submission attempt
+    formSuccess.style.display = 'none';
+    formErrorSummary.style.display = 'none';
+    document.querySelectorAll(".form-error").forEach(error => {
+      error.style.display = 'none';
+    });
+
+    // Client-side Validation (retained from previous versions)
+    let isValid = true;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const service = document.getElementById('service').value;
+
+    if (!name) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
+    if (!email || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
+    if (!phone) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
+    if (!address) { document.getElementById('addressError').style.display = 'block'; isValid = false; }
+    if (!service) { document.getElementById('serviceError').style.display = 'block'; isValid = false; }
+
+    if (!isValid) {
+      formErrorSummary.textContent = 'Please correct the errors in the form.';
+      formErrorSummary.style.display = 'block';
+      return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending...';
     
-    // Collect data manually to ensure it's clean
-    const formData = new URLSearchParams();
-    formData.append('name', document.getElementById('name').value);
-    formData.append('email', document.getElementById('email').value);
-    formData.append('phone', document.getElementById('phone').value);
-    formData.append('address', document.getElementById('address').value);
-    formData.append('service', document.getElementById('service').value);
-    formData.append('size', document.getElementById('size').value);
-    formData.append('details', document.getElementById('details').value);
+    // Use FormData directly from the form for robust submission
+    const formData = new FormData(quoteForm);
 
     fetch(WEB_APP_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      body: formData
+      mode: 'no-cors', // Essential for cross-origin Apps Script submissions
+      body: formData // Send FormData directly
     })
     .then(() => {
-      // 1. SUCCESS UI: Show the green message
+      // SUCCESS UI: Show the green message
       formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged.';
       formSuccess.style.display = 'block';
       quoteForm.reset();
       
-      // 2. BUTTON RESET: Change text back to "Submit Request" immediately after success
+      // Button Reset: Change text back to "Submit Request" immediately after success
       submitBtn.textContent = 'Submit Request';
       submitBtn.disabled = false; // Re-enable so it's ready
       
-      // 3. AUTO-REFRESH: After 3 seconds, refresh the page to clear everything
+      // AUTO-REFRESH: After 3 seconds, refresh the page to clear everything
       setTimeout(() => {
         window.location.reload();
       }, 3000); // 3000ms = 3 seconds
     })
     .catch(err => {
-      console.error(err);
-      formErrorSummary.textContent = 'Submission failed. Please check your internet.';
+      console.error('Submission error:', err);
+      formErrorSummary.textContent = 'Submission failed. Please check your internet connection or try again.';
       formErrorSummary.style.display = 'block';
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Request';
