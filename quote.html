@@ -8,7 +8,7 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\'ll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
@@ -57,7 +57,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -508,7 +508,7 @@
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\'ll get back to you within 24 hours</p>
 
             <form id="quoteForm">
               <div class="form-grid">
@@ -563,15 +563,16 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="image">Upload Property Image (Optional)</label>
-                <input type="file" id="image" name="image" accept="image/*">
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Max size: 10MB</p>
-                </div>
 
               <div class="form-group">
                 <label for="details">Additional Details</label>
                 <textarea id="details" name="details" placeholder="Any specific requests or access instructions..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="image">Upload Property Image (Optional)</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Max size: 10MB</p>
               </div>
 
               <button type="submit" class="btn btn-red" id="submitBtn">Submit Request</button>
@@ -590,7 +591,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We'll get back to you within 24 hours with a personalized quote.</p>
+                <p>We\'ll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -655,165 +656,203 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener(\'DOMContentLoaded\', () => {
       // 1. HEADER LOGIC
-      const menuToggle = document.getElementById('menuToggle');
-      const mainNav = document.querySelector('#main-nav ul');
-      const header = document.getElementById('main-header');
+      const menuToggle = document.getElementById(\'menuToggle\');
+      const mainNav = document.querySelector(\'#main-nav ul\');
+      const header = document.getElementById(\'main-header\');
 
       if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-          const isOpen = mainNav.classList.toggle('open');
-          menuToggle.classList.toggle('active', isOpen);
-          menuToggle.setAttribute('aria-expanded', isOpen);
-          document.body.classList.toggle('no-scroll', isOpen);
+        menuToggle.addEventListener(\'click\', () => {
+          const isOpen = mainNav.classList.toggle(\'open\');
+          menuToggle.classList.toggle(\'active\', isOpen);
+          menuToggle.setAttribute(\'aria-expanded\', isOpen);
+          document.body.classList.toggle(\'no-scroll\', isOpen);
         });
 
         // Close menu when a link is clicked
-        mainNav.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            mainNav.classList.remove('open');
-            menuToggle.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('no-scroll');
+        mainNav.querySelectorAll(\'a\').forEach(link => {
+          link.addEventListener(\'click\', () => {
+            mainNav.classList.remove(\'open\');
+            menuToggle.classList.remove(\'active\');
+            menuToggle.setAttribute(\'aria-expanded\', \'false\');
+            document.body.classList.remove(\'no-scroll\');
           });
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!header.contains(e.target) && mainNav.classList.contains('open')) {
-            mainNav.classList.remove('open');
-            menuToggle.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('no-scroll');
+        document.addEventListener(\'click\', (e) => {
+          if (!header.contains(e.target) && mainNav.classList.contains(\'open\')) {
+            mainNav.classList.remove(\'open\');
+            menuToggle.classList.remove(\'active\');
+            menuToggle.setAttribute(\'aria-expanded\', \'false\');
+            document.body.classList.remove(\'no-scroll\');
           }
         });
 
         // Close menu on window resize
-        window.addEventListener('resize', () => {
-          if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
-            mainNav.classList.remove('open');
-            menuToggle.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('no-scroll');
+        window.addEventListener(\'resize\', () => {
+          if (window.innerWidth > 768 && mainNav.classList.contains(\'open\')) {
+            mainNav.classList.remove(\'open\');
+            menuToggle.classList.remove(\'active\');
+            menuToggle.setAttribute(\'aria-expanded\', \'false\');
+            document.body.classList.remove(\'no-scroll\');
           }
         });
       }
 
       // Header Scroll Effect
-      window.addEventListener('scroll', () => {
+      window.addEventListener(\'scroll\', () => {
         if (window.scrollY > 50) {
-          header.classList.add('scrolled');
+          header.classList.add(\'scrolled\');
         } else {
-          header.classList.remove('scrolled');
+          header.classList.remove(\'scrolled\');
         }
       });
 
       // Smooth Scroll for Internal Links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const href = this.getAttribute('href');
-          if (href !== '#' && document.querySelector(href)) {
+      document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
+        anchor.addEventListener(\'click\', function (e) {
+          const href = this.getAttribute(\'href\');
+          if (href !== \'#\' && document.querySelector(href)) {
             e.preventDefault();
             const target = document.querySelector(href);
             const headerHeight = header.offsetHeight;
             const targetPosition = target.offsetTop - headerHeight - 20;
             window.scrollTo({
               top: targetPosition,
-              behavior: 'smooth'
+              behavior: \'smooth\'
             });
           }
         });
       });
 
       // 2. FORM SUBMISSION LOGIC
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJFirHh87jcdSuil8uEDQi2CpXwfFDaFu8AjUZgkFRZ2f2Zh1OZJOI1enR5Z2wQ1Xp/exec';
-      const quoteForm = document.getElementById('quoteForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const formSuccess = document.getElementById('formSuccess');
-      const formErrorSummary = document.getElementById('formErrorSummary');
+      const WEB_APP_URL = \'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE\'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+      const quoteForm = document.getElementById(\'quoteForm\');
+      const submitBtn = document.getElementById(\'submitBtn\');
+      const formSuccess = document.getElementById(\'formSuccess\');
+      const formErrorSummary = document.getElementById(\'formErrorSummary\');
 
       if (quoteForm) {
-      quoteForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Reset UI
-  formSuccess.style.display = 'none';
-  formErrorSummary.style.display = 'none';
-  document.querySelectorAll(".form-error").forEach(error => error.style.display = 'none');
+        quoteForm.addEventListener(\'submit\', function(e) {
+          e.preventDefault();
+          
+          // Reset UI
+          formSuccess.style.display = \'none\';
+          formErrorSummary.style.display = \'none\';
+          document.querySelectorAll(".form-error").forEach(error => error.style.display = \'none\');
 
-  // Basic Validation
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const service = document.getElementById('service').value;
-  const fileInput = document.getElementById('image');
+          // Basic Validation
+          const name = document.getElementById(\'name\').value.trim();
+          const phone = document.getElementById(\'phone\').value.trim();
+          const email = document.getElementById(\'email\').value.trim();
+          const address = document.getElementById(\'address\').value.trim();
+          const service = document.getElementById(\'service\').value;
+          const fileInput = document.getElementById(\'image\');
 
-  if (!name || !email || !phone || !address || !service) {
-    formErrorSummary.textContent = 'Please fill in all required fields.';
-    formErrorSummary.style.display = 'block';
-    return;
-  }
+          if (!name || !email || !phone || !address || !service) {
+            formErrorSummary.textContent = \'Please fill in all required fields.\';
+            formErrorSummary.style.display = \'block\';
+            return;
+          }
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Uploading & Sending...';
+          submitBtn.disabled = true;
+          submitBtn.textContent = \'Sending...\';
 
-  // Prepare data
-  const data = {
-    name: name,
-    email: email,
-    phone: phone,
-    address: address,
-    service: service,
-    size: document.getElementById('size').value,
-    details: document.getElementById('details').value,
-    image: null,
-    imageName: null,
-    imageType: null
-  };
+          // Prepare data object for JSON submission
+          const data = {
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            service: service,
+            size: document.getElementById(\'size\').value,
+            details: document.getElementById(\'details\').value,
+            image: null,
+            imageName: null,
+            imageType: null
+          };
 
-  // Function to send data to Google
-  const sendData = (finalData) => {
-    fetch(WEB_APP_URL, {
-      method: 'POST',
-      body: JSON.stringify(finalData)
-    })
-    .then(res => res.json())
-    .then(result => {
-      if (result.status === 'success') {
-        formSuccess.innerHTML = '<strong>✅ Success!</strong> Quote request and image sent.';
-        formSuccess.style.display = 'block';
-        quoteForm.reset();
-        setTimeout(() => window.location.reload(), 3000);
-      } else {
-        throw new Error(result.message);
+          // Function to send data to Google Apps Script
+          const sendData = (finalData) => {
+            fetch(WEB_APP_URL, {
+              method: \'POST\',
+              // mode: \'no-cors\', // Not needed when sending JSON and expecting JSON response
+              headers: {
+                \'Content-Type\': \'application/json\'
+              },
+              body: JSON.stringify(finalData)
+            })
+            .then(response => {
+              // Check if response is OK (status 200-299)
+              if (!response.ok) {
+                // Attempt to read error message from response body if available
+                return response.json().then(err => {
+                  throw new Error(err.message || \'Server error\');
+                }).catch(() => {
+                  throw new Error(\'Network response was not ok. Status: \' + response.status);
+                });
+              }
+              return response.json();
+            })
+            .then(result => {
+              if (result.status === \'success\') {
+                formSuccess.innerHTML = \'<strong>✅ Success!</strong> Your quote request has been logged and emails sent. Page will refresh shortly.\';
+                formSuccess.style.display = \'block\';
+                quoteForm.reset();
+                submitBtn.textContent = \'Submit Request\';
+                submitBtn.disabled = false;
+                
+                setTimeout(() => {
+                  window.location.reload();
+                }, 3000);
+              } else {
+                throw new Error(result.message || \'Unknown error occurred\');
+              }
+            })
+            .catch(err => {
+              console.error(\'Submission error:\', err);
+              formErrorSummary.textContent = \'Submission failed: \' + err.message + \'. Please try again.\';
+              formErrorSummary.style.display = \'block\';
+              submitBtn.disabled = false;
+              submitBtn.textContent = \'Submit Request\';
+            });
+          };
+
+          // Handle File Upload (if a file is selected)
+          if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            // Check file size (e.g., 10MB limit)
+            if (file.size > 10 * 1024 * 1024) { 
+              formErrorSummary.textContent = \'File size exceeds 10MB limit.\';
+              formErrorSummary.style.display = \'block\';
+              submitBtn.disabled = false;
+              submitBtn.textContent = \'Submit Request\';
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              data.image = event.target.result.split(\'\',\')[1]; // Base64 string
+              data.imageName = `${name.replace(/\s+/g, \'_\')}_${phone.replace(/\D/g, \'\')}`; // Rename as Name_Phone (cleaned)
+              data.imageType = file.type;
+              sendData(data);
+            };
+            reader.onerror = function(error) {
+              console.error(\'FileReader error:\', error);
+              formErrorSummary.textContent = \'Error reading file. Please try again.\';
+              formErrorSummary.style.display = \'block\';
+              submitBtn.disabled = false;
+              submitBtn.textContent = \'Submit Request\';
+            };
+            reader.readAsDataURL(file);
+          } else {
+            sendData(data); // Send without image
+          }
+        });
       }
-    })
-    .catch(err => {
-      console.error(err);
-      formErrorSummary.textContent = 'Error: ' + err.message;
-      formErrorSummary.style.display = 'block';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Request';
     });
-  };
-
-  // Handle File Upload
-  if (fileInput.files.length > 0) {
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      data.image = event.target.result.split(',')[1]; // Base64 string
-      data.imageName = `${name.replace(/\s+/g, '_')}_${phone}`; // Rename as Name_Phone
-      data.imageType = file.type;
-      sendData(data);
-    };
-    reader.readAsDataURL(file);
-  } else {
-    sendData(data); // Send without image
-  }
-});
   </script>
 </body>
 </html>
