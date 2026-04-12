@@ -105,7 +105,7 @@
       gap: 2.5rem;
     }
 
-    /* Header - Matches index(4).html exactly */
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -200,7 +200,6 @@
       transform: rotate(-45deg) translate(7px, -7px);
     }
 
-    /* Responsive Header Styles from index(4).html */
     @media (max-width: 768px) {
       header {
         height: 64px;
@@ -256,14 +255,6 @@
       margin-bottom: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--primary-blue);
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
       color: var(--primary-blue);
     }
 
@@ -476,7 +467,7 @@
 </head>
 <body>
   <div class="auto-frame">
-    <!-- Header - Aligned with index(4).html -->
+    <!-- Header -->
     <header id="main-header">
       <div class="container header-inner">
         <a href="index.html" class="logo">
@@ -490,12 +481,9 @@
         </button>
         <nav id="main-nav">
           <ul>
-            <li><a href="index.html#home">Home</a></li>
-       <!--     <li><a href="index.html#services">Services</a></li> --> --
-         <!--     <li><a href="about.html">About</a></li>
-           <!--   <li><a href="index.html#gallery">Gallery</a></li>
-          <!--    <li><a href="index.html#contact">Contact</a></li>-->
-            <li><a href="quote.html" class="btn btn-red">Get a Quote</a></li> 
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#why-quote">Why Quote</a></li>
+            <li><a href="#quote-form" class="btn btn-red">Get Quote</a></li>
           </ul>
         </nav>
       </div>
@@ -559,7 +547,7 @@
                     <option value="Move-In/Move-Out Cleaning">Move-In/Move-Out Cleaning</option>
                     <option value="Airbnb/Short-Term Rental">Airbnb/Short-Term Rental</option>
                     <option value="Office Cleaning">Office Cleaning</option>
-                  <!--  <option value="Warehouse Cleaning">Warehouse Cleaning</option> -->
+                    <option value="Warehouse Cleaning">Warehouse Cleaning</option>
                   </select>
                   <div id="serviceError" class="form-error">Please select a service.</div>
                 </div>
@@ -586,8 +574,8 @@
           </div>
 
           <!-- Benefits Section -->
-          <div>
-            <h2 style="text-align: center; margin-bottom: 3rem;">Why Get a Quote from US?</h2>
+          <div id="why-quote">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Why Get a Quote from SHINELY?</h2>
             <div class="benefits-grid">
               <div class="benefit-card">
                 <div class="benefit-icon">💰</div>
@@ -631,10 +619,9 @@
           <div class="footer-section">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="index.html#home">Home</a></li>
-              <li><a href="index.html#services">Services</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#why-quote">Why Quote</a></li>
+              <li><a href="#quote-form">Get Quote</a></li>
             </ul>
           </div>
           <div class="footer-section">
@@ -664,7 +651,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. HEADER LOGIC - Matches index(4).html exactly
+      // 1. HEADER LOGIC
       const menuToggle = document.getElementById('menuToggle');
       const mainNav = document.querySelector('#main-nav ul');
       const header = document.getElementById('main-header');
@@ -717,7 +704,24 @@
         }
       });
 
-      // 2. FORM SUBMISSION LOGIC - Retained from quote(7).html
+      // Smooth Scroll for Internal Links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            const headerHeight = header.offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight - 20;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // 2. FORM SUBMISSION LOGIC
       const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJFirHh87jcdSuil8uEDQi2CpXwfFDaFu8AjUZgkFRZ2f2Zh1OZJOI1enR5Z2wQ1Xp/exec';
       const quoteForm = document.getElementById('quoteForm');
       const submitBtn = document.getElementById('submitBtn');
