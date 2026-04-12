@@ -14,8 +14,8 @@
   
   <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Font Awesome Icons (SRI attributes removed to fix blocking issue) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <style>
     :root {
@@ -728,7 +728,7 @@
       });
 
       // 2. FORM SUBMISSION LOGIC
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx1-5g1eGVxVFL466HBQATNygmoDs34GXqcd8-9-snPexV9CADO278-iZgjXTvWi3wV/exec'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+      const WEB_APP_URL = \'https://script.google.com/macros/s/AKfycbx1-5g1eGVxVFL466HBQATNygmoDs34GXqcd8-9-snPexV9CADO278-iZgjXTvWi3wV/exec'\; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
       const quoteForm = document.getElementById(\'quoteForm\');
       const submitBtn = document.getElementById(\'submitBtn\');
       const formSuccess = document.getElementById(\'formSuccess\');
@@ -737,8 +737,8 @@
       if (quoteForm) {
         quoteForm.addEventListener(\'submit\', async function(e) { 
           e.preventDefault(); // Crucial: Prevent default form submission and page refresh
-          console.log(\"[DEBUG] Form submission initiated. Preventing default refresh.\");
-          console.log(\"[DEBUG] Using WEB_APP_URL:\", WEB_APP_URL);
+          console.log("[DEBUG] Form submission initiated. Preventing default refresh.");
+          console.log("[DEBUG] Using WEB_APP_URL:", WEB_APP_URL);
           
           // Reset UI
           formSuccess.style.display = \'none\';
@@ -756,13 +756,13 @@
           if (!name || !email || !phone || !address || !service) {
             formErrorSummary.textContent = \'Please fill in all required fields.\';
             formErrorSummary.style.display = \'block\';
-            console.log(\"[DEBUG] Validation failed: Missing required fields.\");
+            console.log("[DEBUG] Validation failed: Missing required fields.");
             return;
           }
 
           submitBtn.disabled = true;
           submitBtn.textContent = \'Sending...\';
-          console.log(\"[DEBUG] Validation passed. Button disabled, text changed to Sending...\");
+          console.log("[DEBUG] Validation passed. Button disabled, text changed to Sending...");
 
           let formData = {
             name: name,
@@ -777,7 +777,7 @@
           // Handle File Upload (if a file is selected)
           if (fileInput.files.length > 0) {
             const file = fileInput.files[0];
-            console.log(\"[DEBUG] File detected:\", file.name, \'Type:\', file.type, \'Size:\', file.size);
+            console.log("[DEBUG] File detected:", file.name, \'Type:\', file.type, \'Size:\', file.size);
 
             // Check file size (e.g., 10MB limit)
             if (file.size > 10 * 1024 * 1024) { 
@@ -785,7 +785,7 @@
               formErrorSummary.style.display = \'block\';
               submitBtn.disabled = false;
               submitBtn.textContent = \'Submit Request\';
-              console.log(\"[DEBUG] File size exceeded.\");
+              console.log("[DEBUG] File size exceeded.");
               return;
             }
 
@@ -795,21 +795,21 @@
 
             await new Promise((resolve, reject) => {
               reader.onload = () => {
-                formData.image = reader.result.split(\",\")[1]; // Base64 string
+                formData.image = reader.result.split(\,\')[1]; // Base64 string
                 formData.imageName = file.name;
                 formData.imageType = file.type;
-                console.log(\"[DEBUG] Image read as Base64. Size of Base64 string:\", formData.image.length);
+                console.log("[DEBUG] Image read as Base64. Size of Base64 string:", formData.image.length);
                 resolve();
               };
               reader.onerror = error => {
-                console.error(\"[DEBUG] FileReader error:\", error);
+                console.error("[DEBUG] FileReader error:", error);
                 reject(error);
               };
             });
           }
 
           try {
-            console.log(\"[DEBUG] Attempting to fetch to:\", WEB_APP_URL);
+            console.log("[DEBUG] Attempting to fetch to:", WEB_APP_URL);
             const response = await fetch(WEB_APP_URL, {
               method: \'POST\',
               headers: {
@@ -817,23 +817,23 @@
               },
               body: JSON.stringify(formData) // Send JSON directly
             });
-            console.log(\"[DEBUG] Fetch response received. Status:\", response.status, \'OK:\', response.ok);
+            console.log("[DEBUG] Fetch response received. Status:", response.status, \'OK:\', response.ok);
 
             if (!response.ok) {
               const errorText = await response.text(); // Read as text to avoid JSON parsing errors
-              console.error(\"[DEBUG] Server responded with an error:\", errorText);
+              console.error("[DEBUG] Server responded with an error:", errorText);
               throw new Error(\'Server error: \' + response.status + \' - \' + errorText.substring(0, 100) + \'...\' || \'Server error\');
             }
 
             const result = await response.json(); // Expect JSON response from Apps Script
-            console.log(\"[DEBUG] Parsed JSON response:\", result);
+            console.log("[DEBUG] Parsed JSON response:", result);
 
             if (result.status === \'success\') {
               formSuccess.innerHTML = \'<strong>✅ Success!</strong> Your quote request has been logged and emails sent. Page will refresh shortly.\';
               formSuccess.style.display = \'block\';
               submitBtn.textContent = \'Submit Request\'; // Reset button text before refresh
               submitBtn.disabled = false; // Re-enable button before refresh
-              console.log(\"[DEBUG] Submission successful. UI updated. Refreshing page in 3 seconds.\");
+              console.log("[DEBUG] Submission successful. UI updated. Refreshing page in 3 seconds.");
               
               setTimeout(() => {
                 window.location.reload();
@@ -842,7 +842,7 @@
               throw new Error(result.message || \'Unknown error occurred in Apps Script response\');
             }
           } catch (err) {
-            console.error(\"[DEBUG] Detailed submission error:\", err);
+            console.error("[DEBUG] Detailed submission error:", err);
             formErrorSummary.textContent = \'Submission failed: \' + err.message + \'. Please check the console for details.\';
             formErrorSummary.style.display = \'block\';
             submitBtn.disabled = false;
