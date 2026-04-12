@@ -15,7 +15,7 @@
   <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <style>
     :root {
@@ -105,7 +105,7 @@
       gap: 2.5rem;
     }
 
-    /* Header */
+    /* Header - Matches index(4).html exactly */
     header {
       position: sticky;
       top: 0;
@@ -140,6 +140,11 @@
       gap: 0.75rem;
     }
 
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
     .logo span {
       color: var(--accent-red);
     }
@@ -148,7 +153,6 @@
       display: flex;
       gap: 0.25rem;
       align-items: center;
-      list-style: none;
     }
 
     nav a {
@@ -194,6 +198,45 @@
 
     .menu-toggle.active span:nth-child(3) {
       transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Responsive Header Styles from index(4).html */
+    @media (max-width: 768px) {
+      header {
+        height: 64px;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+        margin-left: auto;
+      }
+
+      nav ul {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        display: none !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        z-index: 99;
+        gap: 0.75rem;
+      }
+
+      nav ul.open {
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
+      }
     }
 
     /* Hero Section */
@@ -335,17 +378,6 @@
       display: none;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -388,33 +420,6 @@
     .benefit-card p {
       color: var(--text-muted);
       font-size: 0.95rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .form-wrapper {
-        padding: 1.5rem;
-      }
-
-      nav ul {
-        display: none;
-      }
-
-      nav ul.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        border-bottom: 1px solid var(--border-light);
-        padding: 1rem;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
     }
 
     footer {
@@ -471,27 +476,28 @@
 </head>
 <body>
   <div class="auto-frame">
-    <!-- Header -->
-    <header>
-      <div class="container">
-        <div class="header-inner">
-          <a href="#" class="logo">
-            🧹 <span>Shinely</span>
-          </a>
-          <button class="menu-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <nav class="main-nav">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
+    <!-- Header - Aligned with index(4).html -->
+    <header id="main-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          <img src="images/brandlogo_bg.png" alt="SHINELY Logo">
+          <span>🧹</span>
+        </a>
+        <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#gallery">Gallery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="quote.html" class="btn btn-red">Get a Quote</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
@@ -516,7 +522,7 @@
             <h2>Request a Quote</h2>
             <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
 
-            <form id="quoteForm" target="_hidden_iframe" method="POST">
+            <form id="quoteForm">
               <div class="form-grid">
                 <div class="form-group">
                   <label for="name">Full Name *</label>
@@ -625,27 +631,27 @@
           <div class="footer-section">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Services</h4>
             <ul>
-              <li><a href="#">Domestic Cleaning</a></li>
-              <li><a href="#">Deep Cleaning</a></li>
-              <li><a href="#">End of Tenancy</a></li>
-              <li><a href="#">Airbnb Cleaning</a></li>
+              <li><a href="index.html#services">Domestic Cleaning</a></li>
+              <li><a href="index.html#services">Deep Cleaning</a></li>
+              <li><a href="index.html#services">End of Tenancy</a></li>
+              <li><a href="index.html#services">Airbnb Cleaning</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:+1234567890">📞 (555) 123-4567</a></li>
+              <li><a href="tel:07432642168">📞 074 3264 2168</a></li>
               <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
-              <li>Your City, Country</li>
+              <li>Cardiff, United Kingdom</li>
             </ul>
           </div>
         </div>
@@ -656,94 +662,128 @@
     </footer>
   </div>
 
-  <!-- Hidden iframe for form submission -->
-<!---  <iframe name="_hidden_iframe" id="_hidden_iframe" style="display:none;"></iframe> ---->
-
   <script>
- 
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJFirHh87jcdSuil8uEDQi2CpXwfFDaFu8AjUZgkFRZ2f2Zh1OZJOI1enR5Z2wQ1Xp/exec'; // <--- PASTE THE NEW URL FROM STEP 2
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. HEADER LOGIC - Matches index(4).html exactly
+      const menuToggle = document.getElementById('menuToggle');
+      const mainNav = document.querySelector('#main-nav ul');
+      const header = document.getElementById('main-header');
 
-  const quoteForm = document.getElementById('quoteForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const formSuccess = document.getElementById('formSuccess');
-  const formErrorSummary = document.getElementById('formErrorSummary');
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = mainNav.classList.toggle('open');
+          menuToggle.classList.toggle('active', isOpen);
+          menuToggle.setAttribute('aria-expanded', isOpen);
+          document.body.classList.toggle('no-scroll', isOpen);
+        });
 
-  // Simple Header/Menu Logic (from previous versions)
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mainNav = document.querySelector('.main-nav ul');
-  if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('open');
-      menuToggle.classList.toggle('active');
+        // Close menu when a link is clicked
+        mainNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!header.contains(e.target) && mainNav.classList.contains('open')) {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+          }
+        });
+
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
+            mainNav.classList.remove('open');
+            menuToggle.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('no-scroll');
+          }
+        });
+      }
+
+      // Header Scroll Effect
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // 2. FORM SUBMISSION LOGIC - Retained from quote(7).html
+      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJFirHh87jcdSuil8uEDQi2CpXwfFDaFu8AjUZgkFRZ2f2Zh1OZJOI1enR5Z2wQ1Xp/exec';
+      const quoteForm = document.getElementById('quoteForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formSuccess = document.getElementById('formSuccess');
+      const formErrorSummary = document.getElementById('formErrorSummary');
+
+      if (quoteForm) {
+        quoteForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          formSuccess.style.display = 'none';
+          formErrorSummary.style.display = 'none';
+          document.querySelectorAll(".form-error").forEach(error => {
+            error.style.display = 'none';
+          });
+
+          let isValid = true;
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const phone = document.getElementById('phone').value.trim();
+          const address = document.getElementById('address').value.trim();
+          const service = document.getElementById('service').value;
+
+          if (!name) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
+          if (!email || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
+          if (!phone) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
+          if (!address) { document.getElementById('addressError').style.display = 'block'; isValid = false; }
+          if (!service) { document.getElementById('serviceError').style.display = 'block'; isValid = false; }
+
+          if (!isValid) {
+            formErrorSummary.textContent = 'Please correct the errors in the form.';
+            formErrorSummary.style.display = 'block';
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+          
+          const formData = new FormData(quoteForm);
+
+          fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          })
+          .then(() => {
+            formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged.';
+            formSuccess.style.display = 'block';
+            quoteForm.reset();
+            submitBtn.textContent = 'Submit Request';
+            submitBtn.disabled = false;
+            
+            setTimeout(() => {
+              window.location.reload();
+            }, 3000);
+          })
+          .catch(err => {
+            console.error('Submission error:', err);
+            formErrorSummary.textContent = 'Submission failed. Please check your internet connection or try again.';
+            formErrorSummary.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Request';
+          });
+        });
+      }
     });
-  }
-
-  // Submission Logic
-  quoteForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Reset messages and button state on new submission attempt
-    formSuccess.style.display = 'none';
-    formErrorSummary.style.display = 'none';
-    document.querySelectorAll(".form-error").forEach(error => {
-      error.style.display = 'none';
-    });
-
-    // Client-side Validation (retained from previous versions)
-    let isValid = true;
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const service = document.getElementById('service').value;
-
-    if (!name) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
-    if (!email || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
-    if (!phone) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
-    if (!address) { document.getElementById('addressError').style.display = 'block'; isValid = false; }
-    if (!service) { document.getElementById('serviceError').style.display = 'block'; isValid = false; }
-
-    if (!isValid) {
-      formErrorSummary.textContent = 'Please correct the errors in the form.';
-      formErrorSummary.style.display = 'block';
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    // Use FormData directly from the form for robust submission
-    // This ensures all input fields with a 'name' attribute are included.
-    const formData = new FormData(quoteForm);
-
-    fetch(WEB_APP_URL, {
-      method: 'POST',
-      mode: 'no-cors', // Essential for cross-origin Apps Script submissions
-      body: formData // Send FormData directly
-    })
-    .then(() => {
-      // SUCCESS UI: Show the green message
-      formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged.';
-      formSuccess.style.display = 'block';
-      quoteForm.reset();
-      
-      // Button Reset: Change text back to "Submit Request" immediately after success
-      submitBtn.textContent = 'Submit Request';
-      submitBtn.disabled = false; // Re-enable so it's ready
-      
-      // AUTO-REFRESH: After 3 seconds, refresh the page to clear everything
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000); // 3000ms = 3 seconds
-    })
-    .catch(err => {
-      console.error('Submission error:', err);
-      formErrorSummary.textContent = 'Submission failed. Please check your internet connection or try again.';
-      formErrorSummary.style.display = 'block';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Request';
-    });
-  });  
-</script>
+  </script>
 </body>
 </html>
