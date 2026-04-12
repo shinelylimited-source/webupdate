@@ -8,14 +8,14 @@
   
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
-  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We\'ll respond within 24 hours.">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
   <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <style>
     :root {
@@ -33,6 +33,8 @@
       --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
       --radius: 16px;
       --transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --success-green: #22c55e;
+      --warning-yellow: #eab308;
     }
 
     /* Dark Mode Support */
@@ -57,7 +59,7 @@
     }
 
     body {
-      font-family: \'Segoe UI\', \'Roboto\', \'Oxygen\', \'Ubuntu\', \'Cantarell\', sans-serif;
+      font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
       color: var(--text-dark);
       line-height: 1.7;
       background: var(--bg-soft);
@@ -100,11 +102,6 @@
       padding: clamp(4rem, 10vw, 6rem) 0;
     }
 
-    .grid {
-      display: grid;
-      gap: 2.5rem;
-    }
-
     /* Header */
     header {
       position: sticky;
@@ -140,11 +137,6 @@
       gap: 0.75rem;
     }
 
-    .logo img {
-      height: 50px;
-      width: auto;
-    }
-
     .logo span {
       color: var(--accent-red);
     }
@@ -153,6 +145,7 @@
       display: flex;
       gap: 0.25rem;
       align-items: center;
+      list-style: none;
     }
 
     nav a {
@@ -200,44 +193,6 @@
       transform: rotate(-45deg) translate(7px, -7px);
     }
 
-    @media (max-width: 768px) {
-      header {
-        height: 64px;
-      }
-
-      .container {
-        padding: 0 1.5rem;
-      }
-
-      .menu-toggle {
-        display: flex;
-        margin-left: auto;
-      }
-
-      nav ul {
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        flex-direction: column;
-        padding: 1.5rem;
-        box-shadow: var(--shadow-md);
-        display: none !important;
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-        z-index: 99;
-        gap: 0.75rem;
-      }
-
-      nav ul.open {
-        display: flex !important;
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-
     /* Hero Section */
     .hero {
       min-height: 60vh;
@@ -255,6 +210,14 @@
       margin-bottom: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.03em;
+      color: var(--primary-blue);
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       color: var(--primary-blue);
     }
 
@@ -291,12 +254,18 @@
       box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
     }
 
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .btn-red {
       background: var(--accent-red);
       box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
     }
 
-    .btn-red:hover {
+    .btn-red:hover:not(:disabled) {
       background: #b91c1c;
       box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
     }
@@ -321,6 +290,10 @@
       color: var(--text-dark);
     }
 
+    .required {
+      color: var(--accent-red);
+    }
+
     input, select, textarea {
       width: 100%;
       padding: 0.75rem;
@@ -342,6 +315,110 @@
       min-height: 120px;
     }
 
+    /* Image Upload Styles */
+    .image-upload-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .upload-area {
+      border: 2px dashed var(--border-light);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+      background: var(--light-blue);
+    }
+
+    .upload-area:hover {
+      border-color: var(--primary-blue);
+      background: rgba(30, 58, 138, 0.05);
+    }
+
+    .upload-area.dragover {
+      border-color: var(--primary-blue);
+      background: rgba(30, 58, 138, 0.1);
+      transform: scale(1.02);
+    }
+
+    .upload-area i {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .upload-area p {
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-area .highlight {
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+
+    #imageInput {
+      display: none;
+    }
+
+    .image-preview {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .image-preview.show {
+      display: block;
+    }
+
+    .preview-item {
+      background: var(--light-blue);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .preview-info {
+      flex: 1;
+    }
+
+    .preview-filename {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .preview-size {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .preview-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .remove-image {
+      background: var(--accent-red);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .remove-image:hover {
+      background: #b91c1c;
+    }
+
+    /* Error and Status Messages */
     .form-error {
       color: var(--accent-red);
       font-size: 0.85rem;
@@ -349,24 +426,82 @@
       display: none;
     }
 
+    .form-error.show {
+      display: block;
+    }
+
     .form-success {
       background: #dcfce7;
-      border: 2px solid #22c55e;
+      border: 2px solid var(--success-green);
       color: #166534;
       padding: 1.5rem;
       border-radius: 8px;
       margin-bottom: 2rem;
       display: none;
+      animation: slideIn 0.3s ease;
     }
 
-    .form-error-summary {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 2px solid #f5c6cb;
+    .form-success.show {
+      display: block;
+    }
+
+    .form-warning {
+      background: #fef3c7;
+      border: 2px solid var(--warning-yellow);
+      color: #92400e;
       padding: 1.5rem;
       border-radius: 8px;
       margin-bottom: 2rem;
       display: none;
+      animation: slideIn 0.3s ease;
+    }
+
+    .form-warning.show {
+      display: block;
+    }
+
+    .form-error-box {
+      background: #fee2e2;
+      border: 2px solid var(--accent-red);
+      color: #991b1b;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+      animation: slideIn 0.3s ease;
+    }
+
+    .form-error-box.show {
+      display: block;
+    }
+
+    .error-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .error-list li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .error-list li:before {
+      content: "✕";
+      font-weight: bold;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .form-grid {
@@ -413,6 +548,64 @@
       font-size: 0.95rem;
     }
 
+    /* Loading Spinner */
+    .spinner {
+      border: 3px solid rgba(30, 58, 138, 0.1);
+      border-top: 3px solid var(--primary-blue);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-wrapper {
+        padding: 1.5rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      nav ul.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border-light);
+        padding: 1rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .upload-area {
+        padding: 1.5rem;
+      }
+
+      .preview-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .preview-image {
+        width: 100%;
+        height: 200px;
+      }
+    }
+
     footer {
       background: var(--primary-blue);
       color: var(--white);
@@ -453,39 +646,31 @@
       text-align: center;
       color: rgba(255, 255, 255, 0.8);
     }
-    
-    .social-links a {
-      font-size: 1.5rem;
-      margin-right: 1rem;
-      color: var(--light-blue);
-    }
-    
-    .social-links a:hover {
-      color: var(--white);
-    }
   </style>
 </head>
 <body>
   <div class="auto-frame">
     <!-- Header -->
-    <header id="main-header">
-      <div class="container header-inner">
-        <a href="index.html" class="logo">
-          <img src="images/brandlogo_bg.png" alt="SHINELY Logo">
-          <span>🧹</span>
-        </a>
-        <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav id="main-nav">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#why-quote">Why Quote</a></li>
-            <li><a href="#quote-form" class="btn btn-red">Get Quote</a></li>
-          </ul>
-        </nav>
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <a href="index.html" class="logo">
+            🧹 <span>Shinely</span>
+          </a>
+          <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="quote.html">Get a Quote</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -495,7 +680,7 @@
       <section class="hero">
         <div class="container">
           <h1>Get Your Free Quote</h1>
-          <p class="subtitle">Fill out the form below to receive a personalized cleaning quote from SHINELY LIMITED.</p>
+          <p class="subtitle">Please enter your details below, and a dedicated member of our team will be in touch shortly with a personalized quote.</p>
           <a href="#quote-form" class="btn btn-red">Start Now</a>
         </div>
       </section>
@@ -503,44 +688,59 @@
       <!-- Quote Form Section -->
       <section id="quote-form">
         <div class="container">
-          <div id="formSuccess" class="form-success"></div>
-          <div id="formErrorSummary" class="form-error-summary"></div>
+          <!-- Success Message -->
+          <div id="formSuccess" class="form-success">
+            <strong>✅ Quote Request Submitted Successfully!</strong>
+            <p>Thank you for your request. A confirmation email has been sent to your email address. Our team will review your request and get back to you within 24 hours with a personalized quote.</p>
+          </div>
+
+          <!-- Warning Message -->
+          <div id="formWarning" class="form-warning">
+            <strong>⚠️ Warning:</strong>
+            <p id="warningText"></p>
+          </div>
+
+          <!-- Error Message -->
+          <div id="formErrorBox" class="form-error-box">
+            <strong>❌ Error Submitting Form</strong>
+            <ul id="errorList" class="error-list"></ul>
+          </div>
 
           <div class="form-wrapper">
             <h2>Request a Quote</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we\'ll get back to you within 24 hours</p>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
 
             <form id="quoteForm">
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="name">Full Name *</label>
-                  <input type="text" id="name" name="name" placeholder="Your full name" required>
-                  <div id="nameError" class="form-error">Please enter your full name.</div>
+                  <label for="name">Full Name <span class="required">*</span></label>
+                  <input type="text" id="name" placeholder="Enter your full name" required>
+                  <div class="form-error" id="nameError">Please enter your full name</div>
                 </div>
 
                 <div class="form-group">
-                  <label for="email">Email Address *</label>
-                  <input type="email" id="email" name="email" placeholder="Your email address" required>
-                  <div id="emailError" class="form-error">Please enter a valid email address.</div>
+                  <label for="email">Email Address <span class="required">*</span></label>
+                  <input type="email" id="email" placeholder="Enter your email address" required>
+                  <div class="form-error" id="emailError">Please enter a valid email address</div>
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
-                  <div id="phoneError" class="form-error">Please enter your phone number.</div>
+                  <label for="phone">Phone Number <span class="required">*</span></label>
+                  <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                  <div class="form-error" id="phoneError">Please enter a valid phone number</div>
                 </div>
 
                 <div class="form-group">
-                  <label for="address">Property Address *</label>
-                  <input type="text" id="address" name="address" placeholder="Your property address" required>
-                  <div id="addressError" class="form-error">Please enter the property address.</div>
+                  <label for="address">Property Address <span class="required">*</span></label>
+                  <input type="text" id="address" placeholder="Enter your property address" required>
+                  <div class="form-error" id="addressError">Please enter your property address</div>
                 </div>
               </div>
 
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="service">Type of Cleaning Required *</label>
-                  <select id="service" name="service" required>
+                  <label for="service">Type of Cleaning Required <span class="required">*</span></label>
+                  <select id="service" required>
                     <option value="">Select a service...</option>
                     <option value="General Home Cleaning">General Home Cleaning</option>
                     <option value="Deep Home Cleaning">Deep Home Cleaning</option>
@@ -549,12 +749,12 @@
                     <option value="Office Cleaning">Office Cleaning</option>
                     <option value="Warehouse Cleaning">Warehouse Cleaning</option>
                   </select>
-                  <div id="serviceError" class="form-error">Please select a service.</div>
+                  <div class="form-error" id="serviceError">Please select a service</div>
                 </div>
 
                 <div class="form-group">
                   <label for="size">Property Size (Optional)</label>
-                  <select id="size" name="size">
+                  <select id="size">
                     <option value="">Select approximate size...</option>
                     <option value="Studio / 1 Bedroom">Studio / 1 Bedroom</option>
                     <option value="2-3 Bedrooms">2-3 Bedrooms</option>
@@ -565,22 +765,31 @@
               </div>
 
               <div class="form-group">
-                <label for="details">Additional Details</label>
-                <textarea id="details" name="details" placeholder="Any specific requests or access instructions..."></textarea>
+                <label for="details">Additional Details (Optional)</label>
+                <textarea id="details" placeholder="Any specific requests or access instructions..."></textarea>
               </div>
 
-              <div class="form-group">
-                <label for="image">Upload Property Image (Optional)</label>
-                <input type="file" id="image" name="image" accept="image/*">
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Max size: 10MB</p>
+              <!-- Image Upload Section -->
+              <div class="image-upload-container">
+                <label>Upload Images <span style="font-size: 0.85rem; color: var(--text-muted);">(Optional - Max 5 images, 5MB each)</span></label>
+                <div class="upload-area" id="uploadArea">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>Drag and drop your images here or <span class="highlight">click to browse</span></p>
+                  <p style="font-size: 0.85rem; color: var(--text-muted);">Supported formats: JPG, PNG, GIF, WebP</p>
+                </div>
+                <input type="file" id="imageInput" multiple accept="image/*">
+                <div class="image-preview" id="imagePreview"></div>
+                <div class="form-error" id="imageError"></div>
               </div>
 
-              <button type="submit" class="btn btn-red" id="submitBtn">Submit Request</button>
+              <button type="submit" class="btn btn-red" id="submitBtn">
+                <span id="submitText">Submit Request</span>
+              </button>
             </form>
           </div>
 
           <!-- Benefits Section -->
-          <div id="why-quote">
+          <div>
             <h2 style="text-align: center; margin-bottom: 3rem;">Why Get a Quote from SHINELY?</h2>
             <div class="benefits-grid">
               <div class="benefit-card">
@@ -591,7 +800,7 @@
               <div class="benefit-card">
                 <div class="benefit-icon">⚡</div>
                 <h3>Quick Response</h3>
-                <p>We\'ll get back to you within 24 hours with a personalized quote.</p>
+                <p>We'll get back to you within 24 hours with a personalized quote.</p>
               </div>
               <div class="benefit-card">
                 <div class="benefit-icon">💎</div>
@@ -616,35 +825,31 @@
           <div class="footer-section">
             <h4>SHINELY LIMITED</h4>
             <p>Professional cleaning services you can trust.</p>
-            <div class="social-links" style="margin-top: 1rem;">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
           </div>
           <div class="footer-section">
             <h4>Quick Links</h4>
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li><a href="#why-quote">Why Quote</a></li>
-              <li><a href="#quote-form">Get Quote</a></li>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="quote.html">Get a Quote</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Services</h4>
             <ul>
-              <li><a href="index.html#services">Domestic Cleaning</a></li>
-              <li><a href="index.html#services">Deep Cleaning</a></li>
-              <li><a href="index.html#services">End of Tenancy</a></li>
-              <li><a href="index.html#services">Airbnb Cleaning</a></li>
+              <li><a href="quote.html">Domestic Cleaning</a></li>
+              <li><a href="quote.html">Deep Cleaning</a></li>
+              <li><a href="quote.html">End of Tenancy</a></li>
+              <li><a href="quote.html">Airbnb Cleaning</a></li>
             </ul>
           </div>
           <div class="footer-section">
             <h4>Contact</h4>
             <ul>
-              <li><a href="tel:07432642168">📞 074 3264 2168</a></li>
+              <li><a href="tel:+1234567890">📞 (555) 123-4567</a></li>
               <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
-              <li>Cardiff, United Kingdom</li>
+              <li>Your City, Country</li>
             </ul>
           </div>
         </div>
@@ -656,203 +861,356 @@
   </div>
 
   <script>
-    document.addEventListener(\'DOMContentLoaded\', () => {
-      // 1. HEADER LOGIC
-      const menuToggle = document.getElementById(\'menuToggle\');
-      const mainNav = document.querySelector(\'#main-nav ul\');
-      const header = document.getElementById(\'main-header\');
+    // ========================================================================
+    // CONFIGURATION
+    // ========================================================================
+    const CONFIG = {
+      APPS_SCRIPT_URL: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
+      MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+      MAX_FILES: 5,
+      ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+      TIMEOUT: 30000 // 30 seconds
+    };
 
-      if (menuToggle && mainNav) {
-        menuToggle.addEventListener(\'click\', () => {
-          const isOpen = mainNav.classList.toggle(\'open\');
-          menuToggle.classList.toggle(\'active\', isOpen);
-          menuToggle.setAttribute(\'aria-expanded\', isOpen);
-          document.body.classList.toggle(\'no-scroll\', isOpen);
-        });
+    // ========================================================================
+    // STATE MANAGEMENT
+    // ========================================================================
+    let uploadedFiles = [];
 
-        // Close menu when a link is clicked
-        mainNav.querySelectorAll(\'a\').forEach(link => {
-          link.addEventListener(\'click\', () => {
-            mainNav.classList.remove(\'open\');
-            menuToggle.classList.remove(\'active\');
-            menuToggle.setAttribute(\'aria-expanded\', \'false\');
-            document.body.classList.remove(\'no-scroll\');
-          });
-        });
+    // ========================================================================
+    // VALIDATION FUNCTIONS
+    // ========================================================================
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email) && email.length <= 254;
+    }
 
-        // Close menu when clicking outside
-        document.addEventListener(\'click\', (e) => {
-          if (!header.contains(e.target) && mainNav.classList.contains(\'open\')) {
-            mainNav.classList.remove(\'open\');
-            menuToggle.classList.remove(\'active\');
-            menuToggle.setAttribute(\'aria-expanded\', \'false\');
-            document.body.classList.remove(\'no-scroll\');
-          }
-        });
+    function isValidPhone(phone) {
+      const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+      return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
 
-        // Close menu on window resize
-        window.addEventListener(\'resize\', () => {
-          if (window.innerWidth > 768 && mainNav.classList.contains(\'open\')) {
-            mainNav.classList.remove(\'open\');
-            menuToggle.classList.remove(\'active\');
-            menuToggle.setAttribute(\'aria-expanded\', \'false\');
-            document.body.classList.remove(\'no-scroll\');
-          }
-        });
+    function isValidFile(file) {
+      if (!CONFIG.ALLOWED_TYPES.includes(file.type)) {
+        return { valid: false, error: `Invalid file type: ${file.name}. Only JPG, PNG, GIF, WebP allowed.` };
+      }
+      if (file.size > CONFIG.MAX_FILE_SIZE) {
+        return { valid: false, error: `File too large: ${file.name}. Maximum size is 5MB.` };
+      }
+      return { valid: true };
+    }
+
+    // ========================================================================
+    // IMAGE UPLOAD HANDLING
+    // ========================================================================
+    const uploadArea = document.getElementById('uploadArea');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const imageError = document.getElementById('imageError');
+
+    // Click to upload
+    uploadArea.addEventListener('click', () => imageInput.click());
+
+    // Drag and drop
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    // File input change
+    imageInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      imageError.classList.remove('show');
+      imageError.textContent = '';
+
+      const newFiles = Array.from(files);
+
+      // Check total file count
+      if (uploadedFiles.length + newFiles.length > CONFIG.MAX_FILES) {
+        showImageError(`Maximum ${CONFIG.MAX_FILES} files allowed. You have ${uploadedFiles.length} already.`);
+        return;
       }
 
-      // Header Scroll Effect
-      window.addEventListener(\'scroll\', () => {
-        if (window.scrollY > 50) {
-          header.classList.add(\'scrolled\');
+      // Validate each file
+      const errors = [];
+      const validFiles = [];
+
+      newFiles.forEach(file => {
+        const validation = isValidFile(file);
+        if (validation.valid) {
+          validFiles.push(file);
         } else {
-          header.classList.remove(\'scrolled\');
+          errors.push(validation.error);
         }
       });
 
-      // Smooth Scroll for Internal Links
-      document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
-        anchor.addEventListener(\'click\', function (e) {
-          const href = this.getAttribute(\'href\');
-          if (href !== \'#\' && document.querySelector(href)) {
+      if (errors.length > 0) {
+        showImageError(errors.join(' '));
+        return;
+      }
+
+      // Add files to uploaded list
+      uploadedFiles.push(...validFiles);
+      updateImagePreview();
+    }
+
+    function updateImagePreview() {
+      if (uploadedFiles.length === 0) {
+        imagePreview.classList.remove('show');
+        return;
+      }
+
+      imagePreview.classList.add('show');
+      imagePreview.innerHTML = '';
+
+      uploadedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const previewItem = document.createElement('div');
+          previewItem.className = 'preview-item';
+          previewItem.innerHTML = `
+            <img src="${e.target.result}" alt="Preview" class="preview-image">
+            <div class="preview-info">
+              <div class="preview-filename">${file.name}</div>
+              <div class="preview-size">${(file.size / 1024).toFixed(2)} KB</div>
+            </div>
+            <button type="button" class="remove-image" data-index="${index}">Remove</button>
+          `;
+
+          previewItem.querySelector('.remove-image').addEventListener('click', (e) => {
             e.preventDefault();
-            const target = document.querySelector(href);
-            const headerHeight = header.offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight - 20;
-            window.scrollTo({
-              top: targetPosition,
-              behavior: \'smooth\'
-            });
-          }
+            uploadedFiles.splice(index, 1);
+            updateImagePreview();
+          });
+
+          imagePreview.appendChild(previewItem);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function showImageError(message) {
+      imageError.textContent = message;
+      imageError.classList.add('show');
+    }
+
+    // ========================================================================
+    // FORM HANDLING
+    // ========================================================================
+    const header = document.querySelector('header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.querySelector('.main-nav ul');
+    const quoteForm = document.getElementById('quoteForm');
+    const formSuccess = document.getElementById('formSuccess');
+    const formWarning = document.getElementById('formWarning');
+    const formErrorBox = document.getElementById('formErrorBox');
+    const errorList = document.getElementById('errorList');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+
+    // Mobile Menu Toggle
+    if (menuToggle && mainNav) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        document.body.classList.toggle('no-scroll', isOpen);
+      });
+
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mainNav.classList.remove('open');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('no-scroll');
         });
       });
 
-      // 2. FORM SUBMISSION LOGIC
-      const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzdNFJ7VuS-Zt9ISVtQTxSAnxHZjfIN7qCi304qH28JRbr7H1n39RfTgerN4feFZkHJ/exec'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
-      const quoteForm = document.getElementById(\'quoteForm\');
-      const submitBtn = document.getElementById(\'submitBtn\');
-      const formSuccess = document.getElementById(\'formSuccess\');
-      const formErrorSummary = document.getElementById(\'formErrorSummary\');
+      document.addEventListener('click', (e) => {
+        if (!header.contains(e.target) && mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('no-scroll');
+        }
+      });
+    }
 
-      if (quoteForm) {
-        quoteForm.addEventListener(\'submit\', function(e) {
-          e.preventDefault();
-          
-          // Reset UI
-          formSuccess.style.display = \'none\';
-          formErrorSummary.style.display = \'none\';
-          document.querySelectorAll(".form-error").forEach(error => error.style.display = \'none\');
-
-          // Basic Validation
-          const name = document.getElementById(\'name\').value.trim();
-          const phone = document.getElementById(\'phone\').value.trim();
-          const email = document.getElementById(\'email\').value.trim();
-          const address = document.getElementById(\'address\').value.trim();
-          const service = document.getElementById(\'service\').value;
-          const fileInput = document.getElementById(\'image\');
-
-          if (!name || !email || !phone || !address || !service) {
-            formErrorSummary.textContent = \'Please fill in all required fields.\';
-            formErrorSummary.style.display = \'block\';
-            return;
-          }
-
-          submitBtn.disabled = true;
-          submitBtn.textContent = \'Sending...\';
-
-          // Prepare data object for JSON submission
-          const data = {
-            name: name,
-            email: email,
-            phone: phone,
-            address: address,
-            service: service,
-            size: document.getElementById(\'size\').value,
-            details: document.getElementById(\'details\').value,
-            image: null,
-            imageName: null,
-            imageType: null
-          };
-
-          // Function to send data to Google Apps Script
-          const sendData = (finalData) => {
-            fetch(WEB_APP_URL, {
-              method: \'POST\',
-              // mode: \'no-cors\', // Not needed when sending JSON and expecting JSON response
-              headers: {
-                \'Content-Type\': \'application/json\'
-              },
-              body: JSON.stringify(finalData)
-            })
-            .then(response => {
-              // Check if response is OK (status 200-299)
-              if (!response.ok) {
-                // Attempt to read error message from response body if available
-                return response.json().then(err => {
-                  throw new Error(err.message || \'Server error\');
-                }).catch(() => {
-                  throw new Error(\'Network response was not ok. Status: \' + response.status);
-                });
-              }
-              return response.json();
-            })
-            .then(result => {
-              if (result.status === \'success\') {
-                formSuccess.innerHTML = \'<strong>✅ Success!</strong> Your quote request has been logged and emails sent. Page will refresh shortly.\';
-                formSuccess.style.display = \'block\';
-                quoteForm.reset();
-                submitBtn.textContent = \'Submit Request\';
-                submitBtn.disabled = false;
-                
-                setTimeout(() => {
-                  window.location.reload();
-                }, 3000);
-              } else {
-                throw new Error(result.message || \'Unknown error occurred\');
-              }
-            })
-            .catch(err => {
-              console.error(\'Submission error:\', err);
-              formErrorSummary.textContent = \'Submission failed: \' + err.message + \'. Please try again.\';
-              formErrorSummary.style.display = \'block\';
-              submitBtn.disabled = false;
-              submitBtn.textContent = \'Submit Request\';
-            });
-          };
-
-          // Handle File Upload (if a file is selected)
-          if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            // Check file size (e.g., 10MB limit)
-            if (file.size > 10 * 1024 * 1024) { 
-              formErrorSummary.textContent = \'File size exceeds 10MB limit.\';
-              formErrorSummary.style.display = \'block\';
-              submitBtn.disabled = false;
-              submitBtn.textContent = \'Submit Request\';
-              return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-              data.image = event.target.result.split(\'\',\')[1]; // Base64 string
-              data.imageName = `${name.replace(/\s+/g, \'_\')}_${phone.replace(/\D/g, \'\')}`; // Rename as Name_Phone (cleaned)
-              data.imageType = file.type;
-              sendData(data);
-            };
-            reader.onerror = function(error) {
-              console.error(\'FileReader error:\', error);
-              formErrorSummary.textContent = \'Error reading file. Please try again.\';
-              formErrorSummary.style.display = \'block\';
-              submitBtn.disabled = false;
-              submitBtn.textContent = \'Submit Request\';
-            };
-            reader.readAsDataURL(file);
-          } else {
-            sendData(data); // Send without image
-          }
-        });
+    // Header Scroll Effect
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
       }
     });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          const headerHeight = header.offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight - 20;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Form Submission
+    if (quoteForm) {
+      quoteForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await submitForm();
+      });
+    }
+
+    async function submitForm() {
+      try {
+        // Hide previous messages
+        formSuccess.classList.remove('show');
+        formWarning.classList.remove('show');
+        formErrorBox.classList.remove('show');
+        document.querySelectorAll('.form-error').forEach(error => {
+          error.classList.remove('show');
+        });
+
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const service = document.getElementById('service').value;
+        const size = document.getElementById('size').value;
+        const details = document.getElementById('details').value.trim();
+
+        // Validate form
+        const errors = [];
+
+        if (!name || name.length < 2) {
+          document.getElementById('nameError').classList.add('show');
+          errors.push('Please enter a valid name');
+        }
+
+        if (!email || !isValidEmail(email)) {
+          document.getElementById('emailError').classList.add('show');
+          errors.push('Please enter a valid email address');
+        }
+
+        if (!phone || !isValidPhone(phone)) {
+          document.getElementById('phoneError').classList.add('show');
+          errors.push('Please enter a valid phone number');
+        }
+
+        if (!address || address.length < 5) {
+          document.getElementById('addressError').classList.add('show');
+          errors.push('Please enter a valid address');
+        }
+
+        if (!service) {
+          document.getElementById('serviceError').classList.add('show');
+          errors.push('Please select a service');
+        }
+
+        if (errors.length > 0) {
+          showFormErrors(errors);
+          return;
+        }
+
+        // Disable submit button
+        submitBtn.disabled = true;
+        submitText.innerHTML = '<span class="spinner"></span>Submitting...';
+
+        // Prepare form data
+        const formData = {
+          name: name,
+          email: email,
+          phone: phone,
+          address: address,
+          service: service,
+          size: size,
+          details: details,
+          imageCount: uploadedFiles.length,
+          images: []
+        };
+
+        // Convert images to base64
+        if (uploadedFiles.length > 0) {
+          for (const file of uploadedFiles) {
+            const base64 = await fileToBase64(file);
+            formData.images.push({
+              name: file.name,
+              type: file.type,
+              size: file.size,
+              data: base64
+            });
+          }
+        }
+
+        // Send to Apps Script
+        const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(formData),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        // Show success message
+        formSuccess.classList.add('show');
+        quoteForm.reset();
+        uploadedFiles = [];
+        updateImagePreview();
+        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        showFormErrors(['An error occurred while submitting the form. Please try again.']);
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitText.textContent = 'Submit Request';
+      }
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function showFormErrors(errors) {
+      errorList.innerHTML = '';
+      errors.forEach(error => {
+        const li = document.createElement('li');
+        li.textContent = error;
+        errorList.appendChild(li);
+      });
+      formErrorBox.classList.add('show');
+      formErrorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   </script>
 </body>
 </html>
