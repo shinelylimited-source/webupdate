@@ -729,65 +729,86 @@
       const formErrorSummary = document.getElementById('formErrorSummary');
 
       if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          formSuccess.style.display = 'none';
-          formErrorSummary.style.display = 'none';
-          document.querySelectorAll(".form-error").forEach(error => {
-            error.style.display = 'none';
-          });
+      quoteForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Reset UI
+  formSuccess.style.display = 'none';
+  formErrorSummary.style.display = 'none';
+  document.querySelectorAll(".form-error").forEach(error => error.style.display = 'none');
 
-          let isValid = true;
-          const name = document.getElementById('name').value.trim();
-          const email = document.getElementById('email').value.trim();
-          const phone = document.getElementById('phone').value.trim();
-          const address = document.getElementById('address').value.trim();
-          const service = document.getElementById('service').value;
+  // Basic Validation
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const service = document.getElementById('service').value;
+  const fileInput = document.getElementById('image');
 
-          if (!name) { document.getElementById('nameError').style.display = 'block'; isValid = false; }
-          if (!email || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) { document.getElementById('emailError').style.display = 'block'; isValid = false; }
-          if (!phone) { document.getElementById('phoneError').style.display = 'block'; isValid = false; }
-          if (!address) { document.getElementById('addressError').style.display = 'block'; isValid = false; }
-          if (!service) { document.getElementById('serviceError').style.display = 'block'; isValid = false; }
+  if (!name || !email || !phone || !address || !service) {
+    formErrorSummary.textContent = 'Please fill in all required fields.';
+    formErrorSummary.style.display = 'block';
+    return;
+  }
 
-          if (!isValid) {
-            formErrorSummary.textContent = 'Please correct the errors in the form.';
-            formErrorSummary.style.display = 'block';
-            return;
-          }
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Uploading & Sending...';
 
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Sending...';
-          
-          const formData = new FormData(quoteForm);
+  // Prepare data
+  const data = {
+    name: name,
+    email: email,
+    phone: phone,
+    address: address,
+    service: service,
+    size: document.getElementById('size').value,
+    details: document.getElementById('details').value,
+    image: null,
+    imageName: null,
+    imageType: null
+  };
 
-          fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: formData
-          })
-          .then(() => {
-            formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged.';
-            formSuccess.style.display = 'block';
-            quoteForm.reset();
-            submitBtn.textContent = 'Submit Request';
-            submitBtn.disabled = false;
-            
-            setTimeout(() => {
-              window.location.reload();
-            }, 3000);
-          })
-          .catch(err => {
-            console.error('Submission error:', err);
-            formErrorSummary.textContent = 'Submission failed. Please check your internet connection or try again.';
-            formErrorSummary.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Request';
-          });
-        });
+  // Function to send data to Google
+  const sendData = (finalData) => {
+    fetch(WEB_APP_URL, {
+      method: 'POST',
+      body: JSON.stringify(finalData)
+    })
+    .then(res => res.json())
+    .then(result => {
+      if (result.status === 'success') {
+        formSuccess.innerHTML = '<strong>✅ Success!</strong> Quote request and image sent.';
+        formSuccess.style.display = 'block';
+        quoteForm.reset();
+        setTimeout(() => window.location.reload(), 3000);
+      } else {
+        throw new Error(result.message);
       }
+    })
+    .catch(err => {
+      console.error(err);
+      formErrorSummary.textContent = 'Error: ' + err.message;
+      formErrorSummary.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Request';
     });
+  };
+
+  // Handle File Upload
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      data.image = event.target.result.split(',')[1]; // Base64 string
+      data.imageName = `${name.replace(/\s+/g, '_')}_${phone}`; // Rename as Name_Phone
+      data.imageType = file.type;
+      sendData(data);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    sendData(data); // Send without image
+  }
+});
   </script>
 </body>
 </html>
