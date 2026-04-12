@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="SHINELY LIMITED provides professional cleaning services for homes and businesses. Domestic cleaning, deep cleaning, end of tenancy, Airbnb cleaning, office and warehouse services.">
+  <meta name="description" content="Get a free, no-obligation quote from SHINELY LIMITED. Quick response within 24 hours. Transparent pricing for all cleaning services.">
   <meta name="theme-color" content="#1e3a8a">
   
   <!-- Open Graph Meta Tags for Social Sharing -->
-  <meta property="og:title" content="SHINELY LIMITED | Professional Cleaning Services">
-  <meta property="og:description" content="Professional cleaning services you can trust. Exceptional, reliable, and affordable solutions for homes and businesses.">
+  <meta property="og:title" content="Get a Free Quote | SHINELY LIMITED Cleaning Services">
+  <meta property="og:description" content="Request a personalized cleaning quote. Free, no-obligation. We'll respond within 24 hours.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=1200&auto=format&fit=crop">
   
-  <title>SHINELY LIMITED | Professional Cleaning Services</title>
+  <title>Get a Quote | SHINELY LIMITED Cleaning Services</title>
   
-  <!-- Font Awesome Icons (moved to head for better performance) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3H7biwOiSoe5OwMcF0yu0YH5O8h6QFUo+yI+6D0K2ByJUqQO63nPJ8CAN0hMCVrgQQQm8+gB1sKA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Font Awesome Icons (SRI attributes removed to fix blocking issue) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <style>
     :root {
@@ -68,7 +68,7 @@
       overflow: hidden;
     }
 
-    img, video {
+    img {
       max-width: 100%;
       height: auto;
       display: block;
@@ -89,15 +89,6 @@
       outline: none;
     }
 
-    /* Layout */
-    .auto-frame {
-      width: 100%;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      min-height: 100dvh;
-    }
-
     .container {
       width: 100%;
       max-width: 1320px;
@@ -112,13 +103,6 @@
     .grid {
       display: grid;
       gap: 2.5rem;
-    }
-
-    .flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      align-items: center;
     }
 
     /* Header */
@@ -216,551 +200,6 @@
       transform: rotate(-45deg) translate(7px, -7px);
     }
 
-    /* Hero Section */
-    .hero {
-      min-height: 85vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 50%, var(--light-red) 100%);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(30, 58, 138, 0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      padding: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--primary-blue);
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--primary-blue);
-    }
-
-    h3 {
-      font-size: clamp(1.2rem, 3vw, 1.5rem);
-      margin-bottom: 1rem;
-      font-weight: 700;
-      color: var(--text-dark);
-    }
-
-    .subtitle {
-      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero .flex {
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 2.5rem;
-      background: var(--primary-blue);
-      color: var(--white);
-      border-radius: 10px;
-      font-weight: 700;
-      min-height: 48px;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
-    }
-
-    .btn:hover {
-      background: #1e40af;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
-    }
-
-    .btn-red {
-      background: var(--accent-red);
-      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
-    }
-
-    .btn-red:hover {
-      background: #b91c1c;
-      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2.5px solid var(--primary-blue);
-      color: var(--primary-blue);
-      box-shadow: none;
-    }
-
-    .btn-outline:hover {
-      background: var(--primary-blue);
-      color: var(--white);
-    }
-
-    /* Section Titles */
-    .section-title {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
-
-    .section-title h2 {
-      margin-bottom: 1.2rem;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-    }
-
-    /* Services Grid */
-    .services-grid {
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .service-card {
-      background: var(--white);
-      padding: 2.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--primary-blue);
-      transition: var(--transition);
-    }
-
-    .service-card:nth-child(even)::before {
-      background: var(--accent-red);
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary-blue);
-    }
-
-    .service-card:nth-child(even):hover {
-      border-color: var(--accent-red);
-    }
-
-    .service-icon {
-      width: 70px;
-      height: 70px;
-      background: var(--light-blue);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: var(--primary-blue);
-      transition: var(--transition);
-    }
-
-    .service-card:nth-child(even) .service-icon {
-      background: var(--light-red);
-      color: var(--accent-red);
-    }
-
-    .service-card:hover .service-icon {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    .service-card h3 {
-      margin-bottom: 1rem;
-    }
-
-    .service-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.8;
-    }
-
-    /* About Section */
-    .about-section {
-      background: var(--white);
-    }
-
-    .about-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-image {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-light);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-    }
-
-    .about-content h2 {
-      color: var(--accent-red);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-content p {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.9;
-      font-size: 1rem;
-    }
-
-    .features-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.2rem;
-      padding: 1.5rem;
-      background: var(--light-blue);
-      border-radius: 12px;
-      border-left: 4px solid var(--primary-blue);
-      transition: var(--transition);
-    }
-
-    .feature-item:nth-child(even) {
-      background: var(--light-red);
-      border-left-color: var(--accent-red);
-    }
-
-    .feature-item:hover {
-      transform: translateX(8px);
-    }
-
-    .feature-item .icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-    }
-
-    .feature-item p {
-      font-weight: 600;
-      color: var(--text-dark);
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    /* Gallery Section */
-    .gallery-section {
-      background: var(--bg-soft);
-    }
-
-    .gallery-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .gallery-item {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      position: relative;
-      border: 1px solid var(--border-light);
-      aspect-ratio: 1;
-      cursor: pointer;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-      loading: lazy;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(30, 58, 138, 0.95));
-      color: var(--white);
-      padding: 2.5rem 1.5rem 1.5rem;
-      transform: translateY(30px);
-      transition: var(--transition);
-      opacity: 0;
-    }
-
-    .gallery-item:hover .gallery-caption {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .gallery-caption h3 {
-      color: var(--white);
-      margin-bottom: 0;
-      font-size: 1.1rem;
-    }
-
-    /* Contact Section */
-    .contact-section {
-      background: var(--white);
-    }
-
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 0;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border-light);
-    }
-
-    .contact-info {
-      background: var(--primary-blue);
-      color: var(--white);
-      padding: 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .contact-info h3 {
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-
-    .contact-info p {
-      margin-bottom: 2.5rem;
-      line-height: 1.9;
-      opacity: 0.95;
-      font-size: 1rem;
-    }
-
-    .contact-list {
-      list-style: none;
-    }
-
-    .contact-item {
-      margin-bottom: 2.5rem;
-      display: flex;
-      gap: 1.2rem;
-    }
-
-    .contact-item i {
-      font-size: 1.5rem;
-      color: var(--accent-red);
-      flex-shrink: 0;
-    }
-
-    .contact-item-text strong {
-      display: block;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-      font-weight: 700;
-    }
-
-    .contact-item-text p {
-      margin: 0;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .contact-form {
-      padding: 4rem;
-      background: var(--white);
-    }
-
-    .contact-form h3 {
-      margin-bottom: 2.5rem;
-      color: var(--text-dark);
-      font-size: 1.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-dark);
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 1rem;
-      border: 1.5px solid var(--border-light);
-      border-radius: 10px;
-      background: var(--white);
-      min-height: 48px;
-      font-size: 0.95rem;
-      transition: var(--transition);
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 130px;
-    }
-
-    .form-error {
-      color: var(--accent-red);
-      font-size: 0.85rem;
-      margin-top: 0.3rem;
-      display: none;
-    }
-
-    .form-error.show {
-      display: block;
-    }
-
-    .form-success {
-      background: #dcfce7;
-      color: #166534;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      display: none;
-    }
-
-    .form-success.show {
-      display: block;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--text-dark);
-      color: #cbd5e1;
-      padding: 4rem 0 2rem;
-      border-top: 3px solid var(--primary-blue);
-      margin-top: auto;
-    }
-
-    .footer-grid {
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .footer-col h4 {
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .footer-col p {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-links a {
-      color: #94A3B8;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-      padding-left: 5px;
-    }
-
-    .copyright {
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid #334155;
-      font-size: 0.85rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-      .about-wrapper {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-info, .contact-form {
-        padding: 3rem;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
     @media (max-width: 768px) {
       header {
         height: 64px;
@@ -797,266 +236,373 @@
         opacity: 1;
         visibility: visible;
       }
-
-      .hero {
-        min-height: 70vh;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
+    /* Hero Section */
+    .hero {
+      min-height: 60vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 50%, var(--light-red) 100%);
+    }
 
-      h2 {
-        font-size: 1.5rem;
-      }
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary-blue);
+    }
 
-      .subtitle {
-        font-size: 1rem;
-      }
+    .subtitle {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-      .service-card, .contact-form, .contact-info {
-        padding: 1.5rem;
-      }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      background: var(--primary-blue);
+      color: var(--white);
+      border-radius: 10px;
+      font-weight: 700;
+      min-height: 48px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+    }
 
-      .contact-info, .contact-form {
-        padding: 2rem;
-      }
+    .btn:hover {
+      background: #1e40af;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+    }
+
+    .btn-red {
+      background: var(--accent-red);
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+    }
+
+    .btn-red:hover {
+      background: #b91c1c;
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+    }
+
+    /* Form Styles */
+    .form-wrapper {
+      background: var(--white);
+      padding: 3rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: var(--white);
+      color: var(--text-dark);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-error {
+      color: var(--accent-red);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .form-success {
+      background: #dcfce7;
+      border: 2px solid #22c55e;
+      color: #166534;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .form-error-summary {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 2px solid #f5c6cb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Benefits Section */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .benefit-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .benefit-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: var(--primary-blue);
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--light-blue);
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .social-links a {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: var(--light-blue);
+    }
+    
+    .social-links a:hover {
+      color: var(--white);
     }
   </style>
 </head>
 <body>
   <div class="auto-frame">
-    <!-- Header with Corrected Navigation Structure -->
+    <!-- Header -->
     <header id="main-header">
       <div class="container header-inner">
         <a href="index.html" class="logo">
-          <img src="images/brandlogo_bg.png" alt="SHINELY Logo" style="height: 50px; width: auto;">
+          <img src="images/brandlogo_bg.png" alt="SHINELY Logo">
           <span>🧹</span>
-          
         </a>
         <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        <!-- Single, properly structured nav element -->
         <nav id="main-nav">
           <ul>
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="index.html#gallery">Gallery</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="quote.html" class="btn btn-red">Get a Quote</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#why-quote">Why Quote</a></li>
+            <li><a href="#quote-form" class="btn btn-red">Get Quote</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
+    <!-- Main Content -->
     <main style="flex: 1;">
       <!-- Hero Section -->
-      <section id="home" class="hero">
-        <div class="hero-content">
-          <h1>Professional Cleaning Services You Can Trust</h1>
-          <p class="subtitle">SHINELY LIMITED delivers exceptional, reliable, and affordable cleaning solutions for homes and businesses. Experience the difference with our dedicated team.</p>
-          <div class="flex">
-            <a href="quote.html" class="btn btn-red">Get Free Quote</a>
-            <a href="#services" class="btn btn-outline">Explore Services</a>
-          </div>
+      <section class="hero">
+        <div class="container">
+          <h1>Get Your Free Quote</h1>
+          <p class="subtitle">Fill out the form below to receive a personalized cleaning quote from SHINELY LIMITED.</p>
+          <a href="#quote-form" class="btn btn-red">Start Now</a>
         </div>
       </section>
 
-      <!-- Services Section -->
-      <section id="services">
+      <!-- Quote Form Section -->
+      <section id="quote-form">
         <div class="container">
-          <div class="section-title">
-            <h2>Our Cleaning Services</h2>
-            <p>Comprehensive solutions tailored to meet your unique cleaning needs</p>
-          </div>
-          <div class="grid services-grid">
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-sparkles"></i> ✨</div>
-              <h3>Domestic Cleaning</h3>
-              <p>Regular home cleaning services to keep your living space fresh, clean, and welcoming for you and your family.</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-water"></i> 💧</div>
-              <h3>Deep Cleaning</h3>
-              <p>Thorough intensive cleaning that reaches every corner, ensuring a completely sanitized and refreshed environment.</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-door-open"></i> 🚪</div>
-              <h3>End of Tenancy</h3>
-              <p>Complete move-in/move-out cleaning to ensure you get your deposit back or walk into a spotless new home.</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-calendar-check"></i> 📅</div>
-              <h3>Airbnb Cleaning</h3>
-              <p>Fast turnaround cleaning for short-term rentals, ensuring your property is always guest-ready and impressive.</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-briefcase"></i> 💼</div>
-              <h3>Office Cleaning</h3>
-              <p>Professional commercial cleaning to maintain a pristine, productive workspace for your team and clients.</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon"><i class="fas fa-industry"></i> 🏭</div>
-              <h3>Warehouse Cleaning</h3>
-              <p>Industrial cleaning services including high-reach dusting, floor scrubbing, and equipment maintenance.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          <div id="formSuccess" class="form-success"></div>
+          <div id="formErrorSummary" class="form-error-summary"></div>
 
-      <!-- About Section -->
-      <section id="about" class="about-section">
-        <div class="container">
-          <div class="about-wrapper">
-            <div class="about-image">
-              <img src="images/cleaning-cart.jpg" alt="Professional Cleaning Team" loading="lazy">
-            </div>
-            <div class="about-content">
-              <h2>Dedicated to Excellence & Your Satisfaction</h2>
-              <p>SHINELY LIMITED is a professional cleaning company dedicated to delivering high-quality, reliable, and affordable cleaning solutions for homes and businesses.</p>
-              <p>We specialize in domestic cleaning, deep cleaning, end of tenancy, and Airbnb cleaning, ensuring every space is left spotless, fresh, and welcoming. Our goal is simple: to provide consistent, professional service that exceeds expectations.</p>
-              <div class="features-grid">
-                <div class="feature-item">
-                  <span class="icon">⭐</span>
-                  <p>Premium Quality Service</p>
+          <div class="form-wrapper">
+            <h2>Request a Quote</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us about your cleaning needs and we'll get back to you within 24 hours</p>
+
+            <form id="quoteForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Full Name *</label>
+                  <input type="text" id="name" name="name" placeholder="Your full name" required>
+                  <div id="nameError" class="form-error">Please enter your full name.</div>
                 </div>
-                <div class="feature-item">
-                  <span class="icon">🛡️</span>
-                  <p>Fully Insured & Bonded</p>
+
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" placeholder="Your email address" required>
+                  <div id="emailError" class="form-error">Please enter a valid email address.</div>
                 </div>
-                <div class="feature-item">
-                  <span class="icon">🌿</span>
-                  <p>Eco-Friendly Products</p>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number *</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+                  <div id="phoneError" class="form-error">Please enter your phone number.</div>
                 </div>
-                <div class="feature-item">
-                  <span class="icon">✅</span>
-                  <p>100% Satisfaction</p>
-                </div>
-                <div class="feature-item">
-                  <span class="icon">👥</span>
-                  <p>Trained Professionals</p>
-                </div>
-                <div class="feature-item">
-                  <span class="icon">⚡</span>
-                  <p>Fast & Reliable</p>
+
+                <div class="form-group">
+                  <label for="address">Property Address *</label>
+                  <input type="text" id="address" name="address" placeholder="Your property address" required>
+                  <div id="addressError" class="form-error">Please enter the property address.</div>
                 </div>
               </div>
-              <a href="about.html" class="btn btn-red">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- Gallery Section -->
-      <section id="gallery" class="gallery-section">
-        <div class="container">
-          <div class="section-title">
-            <h2>Our Recent Work</h2>
-            <p>See the transformation we bring to every space</p>
-          </div>
-          <div class="grid gallery-grid">
-            <div class="gallery-item">
-              <img src="images/bathroom.jpg" alt="Bathroom Deep Clean" loading="lazy">
-              <div class="gallery-caption"><h3>Bathroom Deep Clean</h3></div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/lounge.jpg" alt="Living Room Refresh" loading="lazy">
-              <div class="gallery-caption"><h3>Living Room Refresh</h3></div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/kitchen.jpg" alt="Kitchen Sanitization" loading="lazy">
-              <div class="gallery-caption"><h3>Kitchen Sanitization</h3></div>
-            </div>
-            <div class="gallery-item">
-              <img src="images/office.jpg" alt="Office Transformation" loading="lazy">
-              <div class="gallery-caption"><h3>Office Transformation</h3></div>
-            </div>
-          </div>
-        </div>
-      </section>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="service">Type of Cleaning Required *</label>
+                  <select id="service" name="service" required>
+                    <option value="">Select a service...</option>
+                    <option value="General Home Cleaning">General Home Cleaning</option>
+                    <option value="Deep Home Cleaning">Deep Home Cleaning</option>
+                    <option value="Move-In/Move-Out Cleaning">Move-In/Move-Out Cleaning</option>
+                    <option value="Airbnb/Short-Term Rental">Airbnb/Short-Term Rental</option>
+                    <option value="Office Cleaning">Office Cleaning</option>
+                    <option value="Warehouse Cleaning">Warehouse Cleaning</option>
+                  </select>
+                  <div id="serviceError" class="form-error">Please select a service.</div>
+                </div>
 
-      <!-- Contact Section -->
-      <section id="contact" class="contact-section">
-        <div class="container">
-          <div class="section-title">
-            <h2>Get In Touch</h2>
-            <p>Ready to experience the SHINELY difference? Contact us today!</p>
-          </div>
-          <div class="contact-wrapper">
-            <div class="contact-info">
-              <h3>Let's Discuss Your Needs</h3>
-              <p>Whether you need regular home cleaning, a one-time deep clean, or commercial services, we're here to help. Get your free quote today!</p>
-              <ul class="contact-list">
-                <li class="contact-item">
-                  <i class="fas fa-envelope"></i>
-                  <div class="contact-item-text">
-                    <strong>Email</strong>
-                    <p>info@shinelylimited.com</p>
-                  </div>
-                </li>
-                <li class="contact-item">
-                  <i class="fas fa-phone"></i>
-                  <div class="contact-item-text">
-                    <strong>Phone</strong>
-                    <p>074 3264 2168</p>
-                  </div>
-                </li>
-                <li class="contact-item">
-                  <i class="fas fa-clock"></i>
-                  <div class="contact-item-text">
-                    <strong>Hours</strong>
-                    <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="contact-form">
-              <h3>Send us a Message</h3>
-              <div class="form-success" id="formSuccess">
-                <strong>✓ Success!</strong> Thank you for your message. We'll get back to you within 24 hours.
+                <div class="form-group">
+                  <label for="size">Property Size (Optional)</label>
+                  <select id="size" name="size">
+                    <option value="">Select approximate size...</option>
+                    <option value="Studio / 1 Bedroom">Studio / 1 Bedroom</option>
+                    <option value="2-3 Bedrooms">2-3 Bedrooms</option>
+                    <option value="4-5 Bedrooms">4-5 Bedrooms</option>
+                    <option value="6+ Bedrooms / Large Home">6+ Bedrooms / Large Home</option>
+                  </select>
+                </div>
               </div>
-              <form id="contactForm">
-                <div class="form-group">
-                  <label for="name">Full Name <span style="color: var(--accent-red);">*</span></label>
-                  <input type="text" id="name" name="name" required placeholder="Your name">
-                  <div class="form-error" id="nameError">Please enter your full name</div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email Address <span style="color: var(--accent-red);">*</span></label>
-                  <input type="email" id="email" name="email" required placeholder="Your email">
-                  <div class="form-error" id="emailError">Please enter a valid email address</div>
-                </div>
-                <div class="form-group">
-                  <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Your phone">
-                  <div class="form-error" id="phoneError">Please enter a valid phone number</div>
-                </div>
-                <div class="form-group">
-                  <label for="message">Message <span style="color: var(--accent-red);">*</span></label>
-                  <textarea id="message" name="message" required placeholder="Your message"></textarea>
-                  <div class="form-error" id="messageError">Please enter your message</div>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Send Message</button>
-              </form>
+
+              <div class="form-group">
+                <label for="details">Additional Details</label>
+                <textarea id="details" name="details" placeholder="Any specific requests or access instructions..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="image">Upload Property Image (Optional)</label>
+                <input type="file" id="image" name="image" accept="image/*">
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Max size: 10MB</p>
+              </div>
+
+              <button type="submit" class="btn btn-red" id="submitBtn">Submit Request</button>
+            </form>
+          </div>
+
+          <!-- Benefits Section -->
+          <div id="why-quote">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Why Get a Quote from SHINELY?</h2>
+            <div class="benefits-grid">
+              <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Free & No Obligation</h3>
+                <p>Get a detailed quote at no cost. No hidden fees, no pressure to commit.</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Quick Response</h3>
+                <p>We'll get back to you within 24 hours with a personalized quote.</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-icon">💎</div>
+                <h3>Transparent Pricing</h3>
+                <p>Clear, honest pricing with no surprises. What you see is what you pay.</p>
+              </div>
+              <div class="benefit-card">
+                <div class="benefit-icon">👥</div>
+                <h3>Professional Team</h3>
+                <p>Our experts assess your needs and provide tailored solutions.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1066,53 +612,56 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="grid footer-grid">
-          <div class="footer-col">
+        <div class="footer-content">
+          <div class="footer-section">
             <h4>SHINELY LIMITED</h4>
-            <p>Professional cleaning services dedicated to making your spaces spotless, fresh, and welcoming. Your satisfaction is our priority.</p>
+            <p>Professional cleaning services you can trust.</p>
+            <div class="social-links" style="margin-top: 1rem;">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
           </div>
-          <div class="footer-col">
+          <div class="footer-section">
             <h4>Quick Links</h4>
-            <ul class="footer-links">
-              <li><a href="index.html#home">Home</a></li>
-              <li><a href="index.html#services">Services</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="index.html#gallery">Gallery</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#why-quote">Why Quote</a></li>
+              <li><a href="#quote-form">Get Quote</a></li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div class="footer-section">
             <h4>Services</h4>
-            <ul class="footer-links">
+            <ul>
               <li><a href="index.html#services">Domestic Cleaning</a></li>
               <li><a href="index.html#services">Deep Cleaning</a></li>
               <li><a href="index.html#services">End of Tenancy</a></li>
               <li><a href="index.html#services">Airbnb Cleaning</a></li>
-              <li><a href="index.html#services">Commercial</a></li>
             </ul>
           </div>
-          <div class="footer-col">
+          <div class="footer-section">
             <h4>Contact</h4>
-            <p><i class="fas fa-envelope"></i> info@shinelylimited.com</p>
-            <p><i class="fas fa-phone"></i> 074 3264 2168</p>
-            <p><i class="fas fa-map-marker-alt"></i> Cardiff, United Kingdom</p>
+            <ul>
+              <li><a href="tel:07432642168">📞 074 3264 2168</a></li>
+              <li><a href="mailto:info@shinelylimited.com">✉️ info@shinelylimited.com</a></li>
+              <li>Cardiff, United Kingdom</li>
+            </ul>
           </div>
         </div>
-        <p class="copyright">© 2024 SHINELY LIMITED. All Rights Reserved.</p>
+        <div class="footer-bottom">
+          <p>&copy; 2026 SHINELY LIMITED. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
       </div>
     </footer>
   </div>
 
-  <!-- Enhanced JavaScript with Improvements -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.querySelector('.menu-toggle');
-      const mainNav = document.querySelector('nav ul');
+      // 1. HEADER LOGIC
+      const menuToggle = document.getElementById('menuToggle');
+      const mainNav = document.querySelector('#main-nav ul');
       const header = document.getElementById('main-header');
-      const contactForm = document.getElementById('contactForm');
-      const formSuccess = document.getElementById('formSuccess');
 
-      // Mobile Menu Toggle with Hamburger Animation
       if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
           const isOpen = mainNav.classList.toggle('open');
@@ -1141,7 +690,7 @@
           }
         });
 
-        // Close menu on window resize (if resized to desktop)
+        // Close menu on window resize
         window.addEventListener('resize', () => {
           if (window.innerWidth > 768 && mainNav.classList.contains('open')) {
             mainNav.classList.remove('open');
@@ -1161,7 +710,7 @@
         }
       });
 
-      // Smooth Scroll Offset for Sticky Header
+      // Smooth Scroll for Internal Links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
@@ -1178,132 +727,127 @@
         });
       });
 
-      // Form Validation and Submission
-      if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-          e.preventDefault();
+      // 2. FORM SUBMISSION LOGIC
+      const WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+      const quoteForm = document.getElementById('quoteForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formSuccess = document.getElementById('formSuccess');
+      const formErrorSummary = document.getElementById('formErrorSummary');
 
-          // Get form values
+      if (quoteForm) {
+        quoteForm.addEventListener('submit', async function(e) { 
+          e.preventDefault(); // Crucial: Prevent default form submission and page refresh
+          console.log("[DEBUG] Form submission initiated. Preventing default refresh.");
+          console.log("[DEBUG] Using WEB_APP_URL:", WEB_APP_URL);
+          
+          // Reset UI
+          formSuccess.style.display = 'none';
+          formErrorSummary.style.display = 'none';
+          document.querySelectorAll(".form-error").forEach(error => error.style.display = 'none');
+
+          // Basic Validation
           const name = document.getElementById('name').value.trim();
           const email = document.getElementById('email').value.trim();
           const phone = document.getElementById('phone').value.trim();
-          const message = document.getElementById('message').value.trim();
+          const address = document.getElementById('address').value.trim();
+          const service = document.getElementById('service').value;
+          const fileInput = document.getElementById('image');
 
-          // Reset error messages
-          document.querySelectorAll('.form-error').forEach(error => {
-            error.classList.remove('show');
-          });
-          formSuccess.classList.remove('show');
-
-          // Validation
-          let isValid = true;
-
-          if (!name) {
-            document.getElementById('nameError').classList.add('show');
-            isValid = false;
+          if (!name || !email || !phone || !address || !service) {
+            formErrorSummary.textContent = 'Please fill in all required fields.';
+            formErrorSummary.style.display = 'block';
+            console.log("[DEBUG] Validation failed: Missing required fields.");
+            return;
           }
 
-          if (!email || !isValidEmail(email)) {
-            document.getElementById('emailError').classList.add('show');
-            isValid = false;
-          }
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Sending...';
+          console.log("[DEBUG] Validation passed. Button disabled, text changed to Sending...");
 
-          if (phone && !isValidPhone(phone)) {
-            document.getElementById('phoneError').classList.add('show');
-            isValid = false;
-          }
+          let formData = {
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            service: service,
+            size: document.getElementById('size').value,
+            details: document.getElementById('details').value,
+          };
 
-          if (!message) {
-            document.getElementById('messageError').classList.add('show');
-            isValid = false;
-          }
+          // Handle File Upload (if a file is selected)
+          if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            console.log("[DEBUG] File detected:", file.name, 'Type:', file.type, 'Size:', file.size);
 
-          // If valid, send to Google Apps Script
-          if (isValid) {
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-
-            const formData = {
-              name: name,
-              email: email,
-              phone: phone,
-              message: message
-            };
-
-            const CONTACT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA73LwbSNFSq9P9S-KfQTfz8jwLVpOos5iXHXIakMHx6NWsrTxwAfWB0Bezxq8gKjp/exec';
-
-            if (CONTACT_APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-              alert('Error: The Google Apps Script URL has not been configured. Please replace the placeholder in index.html with your actual Web App URL.');
-              submitButton.textContent = originalButtonText;
-              submitButton.disabled = false;
+            // Check file size (e.g., 10MB limit)
+            if (file.size > 10 * 1024 * 1024) { 
+              formErrorSummary.textContent = 'File size exceeds 10MB limit.';
+              formErrorSummary.style.display = 'block';
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit Request';
+              console.log("[DEBUG] File size exceeded.");
               return;
             }
 
-            console.log('Sending contact form data to:', CONTACT_APPS_SCRIPT_URL);
-            console.log('Form data:', formData);
+            // Read file as Base64
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
 
-            fetch(CONTACT_APPS_SCRIPT_URL, {
-              method: 'POST',
-              body: JSON.stringify(formData)
-            })
-            .then(response => {
-              console.log('Response status:', response.status);
-              if (!response.ok) {
-                throw new Error('HTTP error, status = ' + response.status);
-              }
-              return response.json();
-            })
-            .then(data => {
-              console.log('Response data:', data);
-              if (data.status === 'success') {
-                formSuccess.classList.add('show');
-                contactForm.reset();
-                formSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              } else {
-                alert('Error: ' + (data.message || 'Unknown error occurred'));
-              }
-            })
-            .catch(error => {
-              console.error('Detailed error:', error);
-              console.error('Error message:', error.message);
-              alert('An error occurred while sending your message. Please check the browser console for more details. Error: ' + error.message);
-            })
-            .finally(() => {
-              submitButton.textContent = originalButtonText;
-              submitButton.disabled = false;
-             });
+            await new Promise((resolve, reject) => {
+              reader.onload = () => {
+                formData.image = reader.result.split(',')[1]; // Base64 string
+                formData.imageName = file.name;
+                formData.imageType = file.type;
+                console.log("[DEBUG] Image read as Base64. Size of Base64 string:", formData.image.length);
+                resolve();
+              };
+              reader.onerror = error => {
+                console.error("[DEBUG] FileReader error:", error);
+                reject(error);
+              };
+            });
           }
-        });
-      }
 
-      // Email validation helper
-      function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-      }
+          try {
+            console.log("[DEBUG] Attempting to fetch to:", WEB_APP_URL);
+            const response = await fetch(WEB_APP_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData) // Send JSON directly
+            });
+            console.log("[DEBUG] Fetch response received. Status:", response.status, 'OK:', response.ok);
 
-      // Phone validation helper
-      function isValidPhone(phone) {
-        const phoneRegex = /^[\d\s\-\+\(\)]+$/.test(phone) && phone.replace(/\D/g, '').length >= 10;
-        return phoneRegex;
-      }
-
-      // Lazy loading for images (fallback for older browsers)
-      if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src || img.src;
-              observer.unobserve(img);
+            if (!response.ok) {
+              const errorText = await response.text(); // Read as text to avoid JSON parsing errors
+              console.error("[DEBUG] Server responded with an error:", errorText);
+              throw new Error('Server error: ' + response.status + ' - ' + errorText.substring(0, 100) + '...' || 'Server error');
             }
-          });
-        });
 
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-          imageObserver.observe(img);
+            const result = await response.json(); // Expect JSON response from Apps Script
+            console.log("[DEBUG] Parsed JSON response:", result);
+
+            if (result.status === 'success') {
+              formSuccess.innerHTML = '<strong>✅ Success!</strong> Your quote request has been logged and emails sent. Page will refresh shortly.';
+              formSuccess.style.display = 'block';
+              submitBtn.textContent = 'Submit Request'; // Reset button text before refresh
+              submitBtn.disabled = false; // Re-enable button before refresh
+              console.log("[DEBUG] Submission successful. UI updated. Refreshing page in 3 seconds.");
+              
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            } else {
+              throw new Error(result.message || 'Unknown error occurred in Apps Script response');
+            }
+          } catch (err) {
+            console.error("[DEBUG] Detailed submission error:", err);
+            formErrorSummary.textContent = 'Submission failed: ' + err.message + '. Please check the console for details.';
+            formErrorSummary.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Request';
+          }
         });
       }
     });
