@@ -30,7 +30,6 @@
       --border-light: #e2e8f0;
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
       --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-      --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
       --radius: 16px;
       --transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -657,7 +656,7 @@
 
   <script>
     document.addEventListener(\'DOMContentLoaded\', () => {
-      // 1. HEADER LOGIC
+      // 1. HEADER LOGIC (UNCHANGED - FROM PREVIOUS WORKING VERSION)
       const menuToggle = document.getElementById(\'menuToggle\');
       const mainNav = document.querySelector(\'#main-nav ul\');
       const header = document.getElementById(\'main-header\');
@@ -670,7 +669,6 @@
           document.body.classList.toggle(\'no-scroll\', isOpen);
         });
 
-        // Close menu when a link is clicked
         mainNav.querySelectorAll(\'a\').forEach(link => {
           link.addEventListener(\'click\', () => {
             mainNav.classList.remove(\'open\');
@@ -680,7 +678,6 @@
           });
         });
 
-        // Close menu when clicking outside
         document.addEventListener(\'click\', (e) => {
           if (!header.contains(e.target) && mainNav.classList.contains(\'open\')) {
             mainNav.classList.remove(\'open\');
@@ -690,7 +687,6 @@
           }
         });
 
-        // Close menu on window resize
         window.addEventListener(\'resize\', () => {
           if (window.innerWidth > 768 && mainNav.classList.contains(\'open\')) {
             mainNav.classList.remove(\'open\');
@@ -701,7 +697,6 @@
         });
       }
 
-      // Header Scroll Effect
       window.addEventListener(\'scroll\', () => {
         if (window.scrollY > 50) {
           header.classList.add(\'scrolled\');
@@ -710,7 +705,6 @@
         }
       });
 
-      // Smooth Scroll for Internal Links
       document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
         anchor.addEventListener(\'click\', function (e) {
           const href = this.getAttribute(\'href\');
@@ -727,8 +721,8 @@
         });
       });
 
-      // 2. FORM SUBMISSION LOGIC
-      const WEB_APP_URL = \'https://script.google.com/macros/s/AKfycbx1-5g1eGVxVFL466HBQATNygmoDs34GXqcd8-9-snPexV9CADO278-iZgjXTvWi3wV/exec'\; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
+      // 2. FORM SUBMISSION LOGIC (REWRITTEN FOR ROBUSTNESS)
+      const WEB_APP_URL = \'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE\'; // <--- PASTE YOUR DEPLOYED WEB APP URL HERE
       const quoteForm = document.getElementById(\'quoteForm\');
       const submitBtn = document.getElementById(\'submitBtn\');
       const formSuccess = document.getElementById(\'formSuccess\');
@@ -736,7 +730,7 @@
 
       if (quoteForm) {
         quoteForm.addEventListener(\'submit\', async function(e) { 
-          e.preventDefault(); // Crucial: Prevent default form submission and page refresh
+          e.preventDefault(); // CRUCIAL: Prevent default form submission and page refresh
           console.log("[DEBUG] Form submission initiated. Preventing default refresh.");
           console.log("[DEBUG] Using WEB_APP_URL:", WEB_APP_URL);
           
@@ -795,7 +789,7 @@
 
             await new Promise((resolve, reject) => {
               reader.onload = () => {
-                formData.image = reader.result.split(\,\')[1]; // Base64 string
+                formData.image = reader.result.split(\'\,\')[1]; // Base64 string
                 formData.imageName = file.name;
                 formData.imageType = file.type;
                 console.log("[DEBUG] Image read as Base64. Size of Base64 string:", formData.image.length);
@@ -809,26 +803,19 @@
           }
 
           try {
-            console.log("[DEBUG] Attempting to fetch to:", WEB_APP_URL);
             const response = await fetch(WEB_APP_URL, {
               method: \'POST\',
               headers: {
                 \'Content-Type\': \'application/json\'
               },
-              body: JSON.stringify(formData) // Send JSON directly
+              body: JSON.stringify(formData)
             });
-            console.log("[DEBUG] Fetch response received. Status:", response.status, \'OK:\', response.ok);
 
-            if (!response.ok) {
-              const errorText = await response.text(); // Read as text to avoid JSON parsing errors
-              console.error("[DEBUG] Server responded with an error:", errorText);
-              throw new Error(\'Server error: \' + response.status + \' - \' + errorText.substring(0, 100) + \'...\' || \'Server error\');
-            }
+            console.log("[DEBUG] Fetch response status:", response.status);
+            const result = await response.json();
+            console.log("[DEBUG] Apps Script response:", result);
 
-            const result = await response.json(); // Expect JSON response from Apps Script
-            console.log("[DEBUG] Parsed JSON response:", result);
-
-            if (result.status === \'success\') {
+            if (result && result.status === \'success\') {
               formSuccess.innerHTML = \'<strong>✅ Success!</strong> Your quote request has been logged and emails sent. Page will refresh shortly.\';
               formSuccess.style.display = \'block\';
               submitBtn.textContent = \'Submit Request\'; // Reset button text before refresh
@@ -839,14 +826,19 @@
                 window.location.reload();
               }, 3000);
             } else {
-              throw new Error(result.message || \'Unknown error occurred in Apps Script response\');
+              const errorMessage = (result && result.message) ? result.message : \'Unknown error occurred in Apps Script response\';
+              formErrorSummary.textContent = \'Submission failed: \' + errorMessage + \'. Please check the console for details.\';
+              formErrorSummary.style.display = \'block\';
+              submitBtn.disabled = false;
+              submitBtn.textContent = \'Submit Request\';
+              console.error("[DEBUG] Apps Script reported error:", errorMessage);
             }
-          } catch (err) {
-            console.error("[DEBUG] Detailed submission error:", err);
-            formErrorSummary.textContent = \'Submission failed: \' + err.message + \'. Please check the console for details.\';
+          } catch (error) {
+            formErrorSummary.textContent = \'Network error or script not reachable: \' + error.message;
             formErrorSummary.style.display = \'block\';
             submitBtn.disabled = false;
             submitBtn.textContent = \'Submit Request\';
+            console.error("[DEBUG] Network or fetch error:", error);
           }
         });
       }
